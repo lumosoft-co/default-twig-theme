@@ -1,0 +1,115 @@
+{
+  "author": "Agora",
+  "support_email": "support@agoramp.com",
+  "config": [
+  {
+      "header": "Global Settings",
+      "options": [
+      {
+          "id": "mode",
+          "name": "Mode",
+          "description": "Choose what color mode you would like to use this theme in.",
+          "type": "select",
+          "default": "Darkmode",
+          "values": [
+              "Darkmode",
+              "Lightmode"
+          ]
+      }
+      ]
+  },
+  {
+      "header": "Header Settings",
+      "options": [
+      {
+          "id": "website",
+          "name": "Website",
+          "description": "Enter a link to your website (optional).",
+          "default": "",
+          "type": "textarea"
+      },
+      {
+          "id": "server_ip",
+          "name": "Server IP",
+          "description": "Enter your server IP address.",
+          "default": "",
+          "type": "textarea"
+      },
+      {
+          "id": "server_port",
+          "name": "Server Port",
+          "description": "Enter your server Port.",
+          "default": "",
+          "type": "textarea"
+      },
+      {
+          "id": "server_id",
+          "name": "Server ID",
+          "description": "FiveM stores only. Enter your FiveM Server List ID used to fetch player count.",
+          "default": "",
+          "type": "textarea"
+      },
+      {
+          "id": "discord_link",
+          "name": "Discord Link",
+          "description": "Enter your permanent Discord invite link.",
+          "default": "",
+          "type": "textarea"
+      },
+      {
+          "id": "discord_id",
+          "name": "Discord ID",
+          "description": "Enter your Discord server ID. In order to fetch the player count, make sure you have the Discord Server Widget enabled in your Discord server settings!",
+          "default": "",
+          "type": "textarea"
+      },
+      {
+          "id": "show_player_count",
+          "name": "Show Player Count",
+          "description": "Select whether or not a player count should be displayed in the header.",
+          "type": "select",
+          "default": "Yes",
+          "values": [
+              "Yes",
+              "No"
+          ]
+      }
+      ]
+  },
+  {
+      "header": "Main Settings",
+      "options": [
+      {
+          "id": "announcement",
+          "name": "Announcement",
+          "description": "Enter an announcement here.",
+          "default": "",
+          "type": "textarea"
+      },
+      {
+          "id": "show_sale_tag",
+          "name": "Show Sale Tag",
+          "description": "Select whether or not a sale tag should be shown when a product is on sale.",
+          "type": "select",
+          "default": "Yes",
+          "values": [
+              "Yes",
+              "No"
+          ]
+      }
+      ]
+  },
+  {
+      "header": "Footer Settings",
+      "options": [
+      {
+          "id": "disclaimer",
+          "name": "Disclaimer",
+          "description": "Enter your footer disclaimer text.",
+          "default": "We are not affiliated with Mojang AB.",
+          "type": "textarea"
+      }
+      ]
+  }
+]
+}

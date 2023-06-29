@@ -1,0 +1,300 @@
+{# SOCIAL LINKS #}
+{% set website = config("website") %}
+{% set server = config("server_ip") %}
+{% set serverPORT = config("server_port") %}
+{% set discord = config("discord_link") %}
+{% set discordID = config("discord_id") %}
+
+{# CONTENT #}
+{% set announcement = config("announcement") %}
+
+{# SETTINGS #}
+{% set showPlayerCount = config("show_player_count")|lower == "yes" ? true : false %} {# Must also define discord id and server ip #}
+{% set onSaleTag = config("show_sale_tag")|lower == "yes" ? true : false %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>{{ store.name }} | {{ __(page.title) }}</title>
+
+    <link href="/templates/209/css/style.min.css" rel="stylesheet">
+
+    <link rel="shortcut icon" href="{{ store.favicon }}">
+
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+
+        _gaq.push(['_setAccount', 'UA-36735942-3']);
+        _gaq.push(['_trackPageview']);
+
+        {% if store.googleAnalytics %}
+        _gaq.push(['b._setAccount', '{{ store.googleAnalytics }}']);
+        _gaq.push(['b._trackPageview']);
+        {% endif %}
+
+        (function () {
+            var ga = document.createElement('script');
+            ga.type = 'text/javascript';
+            ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    <style>{{ store.css|raw }}</style>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="https://cdn.materialdesignicons.com/3.5.95/css/materialdesignicons.min.css"/>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+    <script src="https://unpkg.com/sweetalert@2.1.2/dist/sweetalert.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"
+            integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ"
+            crossorigin="anonymous"></script>
+    <link href='https://fonts.googleapis.com/css?family=Teko:400,700' rel='stylesheet' type='text/css'>
+
+</head>
+<body>
+<div class="header" id="header">
+    <div class="header-part">
+        <div class="header-container">
+            <div class="container">
+                <div class="euphoria-count">
+                    <div class="left ipCopy" data-clipboard-text="{{server}}" onclick="serverjoin()">
+                        <i class="mdi mdi-minecraft"></i>
+                        <h2 class="text--title" id="serverText" data-ip="{{server}}">{{server}}</h2>
+                        {% if showPlayerCount and server and game == "minecraft" %}
+                            <p>Join <span id='serverCount'>0</span> other people!</p>
+                        {% else %}
+                            <p>Click here to copy!</p>
+                        {% endif %}
+                    </div>
+                    <div class="logo">
+                        {% if store.logo %}
+                            <a class="pulse infinite animated" href="/"><img src="{{ store.logo }}"/></a>
+                        {% else %}
+                            <span>{{ store.name }}</span>
+                        {% endif %}
+                    </div>
+                    <div class="right">
+                        <i class="mdi mdi-discord"></i>
+                        <a href="https://discord.gg" target="blank">
+                            <div class="players"><span id="euphoria-discord"></span> Members Online</div>
+                            <small class="ipCopy">Join Our Discord</small>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+
+<div class="container" id="cyvers-container">
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">{{ store.name }}</a>
+            </div>
+
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li class="{% if page.category == "index" %}active{% endif %}"><a href="/">{{ __("Home") }}</a></li>
+                    {% for category in store.categories %}
+                        {% if category.subcategories|length > 0 %}
+                        <li class="dropdown {% if category.active %}active{% endif %}">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ category.name }} <i
+                                        class="fa fa-caret-down"></i></a>
+                            <ul class="dropdown-menu">
+                                {% for subcategory in category.subcategories %}
+                                    <li><a href="/category/{{ subcategory.id }}">{{ subcategory.name }}</a></li>
+                                {% endfor %}
+                            </ul>
+                        {% else %}
+                            <li class="{% if category.active %}active{% endif %}"><a
+                                        href="/category/{{ category.id }}">{{ category.name }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+                    {% for page in store.pages %}
+                        <li class="{% if page.active %}active{% endif %}"><a
+                                    href="/{{ page.slug }}">{{ page.title }}</a></li>
+                    {% endfor %}
+                    {% if basket.packages|length > 0 %}
+                        <li class="visible-xs {% if page.category == "checkout" %}active{% endif %}"><a
+                                    href="/checkout/basket">{{ __("Checkout") }}</a></li>
+                    {% endif %}
+                    {% if basket.username %}
+                        <li class="visible-xs"><a href="/checkout/logout">{{ __("Logout") }}</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="notification">
+        {% if page.message.display %}
+            <div class="alert alert-{{ page.message.type }} alert-dismissable">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                {{ page.message.text }}
+            </div>
+        {% endif %}
+    </div>
+
+    {% block content %}{% endblock %}
+</div>
+<!-- WEBSITE FOOTER -->
+<div class="aFooter">
+    <div class="container">
+        <div class="cyvers-cp p-body-inner" id="mobile-hide">
+            <div>
+                <p>&copy; {{store.name}} <span id="copyrightYear">2021</span></p>
+                <p>{{disclaimer}}</p>
+            </div>
+            <div class="f-right">
+                <p>Powered by <a href="https://agoramp.com">Agora</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+
+<div class="modal" id="popup-modal" tabindex="-1" role="dialog"></div>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="/templates/209/js/bootstrap.min.js"></script>
+<script src="/templates/209/js/skin.min.js"></script>
+<script src="/templates/209/js/site.js"></script>
+
+<script>
+    $(function () {
+        CyversMC("{{ server }}:{{ serverPORT }}", document.querySelector("#euphoria-mc"));
+        CyversDiscord("{{ discordID }}", document.querySelector("#euphoria-discord"));
+
+    });
+</script>
+
+
+<a href="javascript:" id="return-to-top"><i class="fa fa-chevron-up"></i></a>
+
+
+<script>
+    function serverjoin() {
+        swal({
+            title: "IP has been copied!",
+            text: "You can join the server by adding the IP to your server list!",
+            icon: "success",
+            button: "Join Now",
+        });
+    }
+
+    var clipboard = new ClipboardJS('.ipCopy');
+
+    $(window).scroll(function () {
+        if ($(this).scrollTop() >= 50) {
+            $('#return-to-top').fadeIn(200);
+        } else {
+            $('#return-to-top').fadeOut(200);
+        }
+    });
+    $('#return-to-top').click(function () {
+        $('body,html').animate({
+            scrollTop: 0
+        }, 500);
+    });
+
+</script>
+
+<script type="text/javascript">
+    var _gaq = _gaq || [];
+
+    _gaq.push(['_setAccount', 'UA-61297048-1']);
+    _gaq.push(['_trackPageview']);
+
+    {% if store.googleAnalytics %}
+    _gaq.push(['b._setAccount', '{{ store.googleAnalytics }}']);
+    _gaq.push(['b._trackPageview']);
+    {% endif %}
+
+    (function () {
+        var ga = document.createElement('script');
+        ga.type = 'text/javascript';
+        ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(ga, s);
+    })();
+</script>
+
+<script>
+    jQuery(function () {
+        var countdowns = $(".countdown-to");
+        countdowns.each(function () {
+            setInterval(function (ele) {
+                timeLeft = parseInt(ele.attr("data-countdown"));
+                if (timeLeft == 0) {
+                    ele.html("Time Expired!");
+                } else {
+                    timeLeft--;
+                    ele.attr("data-countdown", timeLeft);
+                    var days = Math.floor(timeLeft / (60 * 60 * 24));
+                    var hours = Math.floor((timeLeft % (60 * 60 * 24)) / (60 * 60));
+                    var minutes = Math.floor((timeLeft % (60 * 60)) / (60));
+                    var seconds = Math.floor((timeLeft % 60));
+                    ele.html(days + "d " + hours + "h " + minutes + "m " + seconds + "s");
+                }
+            }, 1000, jQuery(this));
+        });
+    });
+</script>
+
+<script>
+    function CyversMC(ip, element) {
+        fetch(`https://mc-api.net/v3/server/ping/${ip}`)
+            .then(res => res.json())
+            .then(data => element.innerHTML = data["players"]["online"])
+    }
+
+    function CyversDiscord(id, element) {
+        $.get(`https://discordapp.com/api/guilds/${id}/embed.json`, function (data) {
+            element.innerHTML = data["presence_count"];
+        });
+    }
+</script>
+
+<script>
+    function openMobile() {
+        $(".dd-bg").addClass("active");
+        $(".euphoria-menu ul#euphoria-menu").addClass("open");
+    }
+
+    function closeMobile() {
+        $(".dd-bg").removeClass("active");
+        $(".euphoria-menu ul#euphoria-menu").removeClass("open");
+    }
+</script>
+</body>
+</html>
+
+
+
+
+
+

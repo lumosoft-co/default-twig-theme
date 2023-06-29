@@ -1,0 +1,88 @@
+{% extends config("package_info") == "Page" ? "layout.html" : "modal.twig" %}
+
+{% block content %}
+    <div class="body">
+        <!-- SIDEBAR -->
+        <div>
+    	    <div class="sidebar">
+    			{{ modules|raw }}
+    		</div>
+    	</div>
+    	<!-- CONTENT -->
+    	<div class="content">
+    	    <div class="featured">{{ modules|raw }}</div>
+    	    
+    		<div class="panel">
+    			<div class="panel__heading">
+    			    <h1>{{package.name}}</h1>
+    		    </div>
+    			<div class="panel__body">
+    		        <div class="panel__description">
+    		            <div class="package">
+                            <div class="package__info">
+                                <h3>{{ package.name }}</h3>
+                                <div class="package__tags">
+                                    <span class="tag tag--left tag--700">{{ package.price|money }} {{ basket.currency }}</span>
+                                    {% if package.countdownEnds %}
+                                        <span class="tag tag--danger"><i class="fas fa-stopwatch"></i>Ending Soon</span>
+                                    {% endif %}
+                                    {% if package.discount.applied %}
+			                  		    <p class="price--discounted text--title">{{ package.discount.original|money }} {{ basket.currency }}</p>
+			                  		{% endif %}
+		                  		</div>
+                            </div>
+                            <div class="package__buttons {% if not package.basket %}package__buttons--outBasket{% endif %}">
+                                {% if package.basket %}
+                                    <span>Quantity:</span>
+                                    <a href="#" onclick="subtractPackage({{package.id}})" class="iconBoxed iconBoxed--rounded package__remove cursorAura" ><i class="fas fa-minus"></i></a>
+                                    <input type="text" class="package__quantity" name="quantity[{{ package.id }}]" value="{{ package.quantity }}" {% if package.price == 0.00 or package.disableQuantity %}disabled="disabled"{% endif %} maxlength="3"/>
+                                    <a href="/checkout/packages/add/{{ package.id }}" class="iconBoxed iconBoxed--rounded package__add cursorAura"><i class="fas fa-plus"></i></a>
+                                {% else %}
+                                    <a href="/checkout/packages/add/{{ package.id }}" class="btn btn--primary cursorAura">Add to Cart</a>
+                                {% endif %}
+                            </div>
+                        </div>
+    		        </div>
+    		        <div class="markup__body">
+    		            {{ package.description|raw }}
+    		        </div>
+    	        </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block body %}
+<div class="modalWrapper">
+    <div class="modal__header">
+        <h2>{{package.name}}</h2>
+        <button type="button" data-dismiss="modal" aria-hidden="true" class="iconBoxed iconBoxed--rounded btn--dark cursorAura cursorAura--dim">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+    {% if package.description|raw %}
+        <div class="modal__body markup__body">
+            {{ package.description|raw }}
+        </div>
+    {% endif %}
+    {% include 'package_footer.html' %}
+</div>
+
+<script>
+    /* QUICKFIX: CursorAura & Collapsibles not loading on modals */
+    const buttons = document.querySelectorAll(".cursorAura");
+    buttons.forEach(button => button.addEventListener("mousemove", e => {
+       const {x, y} = button.getBoundingClientRect();
+       button.style.setProperty("--x", e.clientX - x);
+       button.style.setProperty("--y", e.clientY - y);
+    }));
+    
+    const collapsibleBtns = document.querySelectorAll(".collapse");
+    const collapsibles = document.querySelectorAll(".collapsible");
+    collapsibleBtns.forEach(element => element.addEventListener("click", () => {
+        let collapsible = [...collapsibles].find(i => i.dataset.collapsible == element.dataset.collapse);
+        console.log(collapsible);
+        collapsible.classList.toggle("collapsible--open");
+    }));
+</script>
+{% endblock %}
