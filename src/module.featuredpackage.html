@@ -26,7 +26,7 @@
                 {% if module.package.basket %}
                     <a href="/checkout/packages/remove/{{ module.package.id }}" class="btn btn-sm btn-danger btn-block">{{ __("Remove") }}</a>
                 {% else %}
-                    <a href="javascript::void(0);" data-remote="/package/{{ module.package.id }}" class="btn btn-info btn-sm btn-block toggle-modal">{{ __("Buy") }}</a>
+                    <a href="/checkout/packages/add/{{ module.package.id }}" data-remote="/package/{{ module.package.id }}" class="btn btn-info btn-sm btn-block toggle-modal">{{ __("Buy") }}</a>
                 {% endif %}
               </div>
             </div>

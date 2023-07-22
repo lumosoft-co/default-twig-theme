@@ -1,4 +1,4 @@
-{% extends config("package_info") == "Page" ? "layout.html" : "modal.twig" %}
+{% extends "modal.twig" %}
 
 {% block content %}
     <div class="body">
@@ -53,20 +53,25 @@
 {% endblock %}
 
 {% block body %}
-<div class="modalWrapper">
-    <div class="modal__header">
-        <h2>{{package.name}}</h2>
-        <button type="button" data-dismiss="modal" aria-hidden="true" class="iconBoxed iconBoxed--rounded btn--dark cursorAura cursorAura--dim">
-            <i class="fas fa-times"></i>
-        </button>
-    </div>
-    {% if package.description|raw %}
+<div class="modalContainer">
+    <div class="modalBackground" data-dismiss="modal"></div>
+
+    <div class="modalContent ">
+        <div class="modal__header">
+            <h2>{{package.name}}</h2>
+            <button type="button" data-dismiss="modal" aria-hidden="true" class="iconBoxed iconBoxed--rounded btn--dark cursorAura cursorAura--dim">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        {% if package.description|raw %}
         <div class="modal__body markup__body">
             {{ package.description|raw }}
         </div>
-    {% endif %}
-    {% include 'package_footer.html' %}
+        {% endif %}
+        {% include 'package_footer.html' %}
+    </div>
 </div>
+
 
 <script>
     /* QUICKFIX: CursorAura & Collapsibles not loading on modals */

@@ -1,11 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:wght@300;400;500;600;700;800;900&display=swap');
+
 :root {
     --header-url: url(https://i.imgur.com/AVoKStB.png);
-    --main-color: #dc3545;
+    --main-color: rgb(101, 89, 254);
     --text-color: #fff;
     --store: rgb(138, 50, 59);
     --footer-bg: #302e2e;
-    --panel-heading: #424040;
-    --panel-body: #2c2b2b;
+    --panel-heading: #111117;
+    --panel-body: #1c1b1e;
     --box-shadow: 0 4px 0 hsla(210, 11%, 13%, 0.85);
     --announce-bg: #dc3545;
     --announce-shadow: 0 4px 0 hsl(354deg 49% 29%);
@@ -13,8 +15,8 @@
     --scrollbar-color: #dc3545;
     --scrollbar-bg: #3f4045;
     --logo-height: 150px;
-    --font-family: "Nunito Sans", "Segoe UI", "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    --html-background: #252323;
+    --font-family: 'Montserrat', sans-serif;
+    --html-background: #0a0a12;
 }
 
 html,
@@ -22,6 +24,8 @@ body {
    margin:0;
    padding:0;
    height:100%;
+
+    font-family: 'Montserrat', sans-serif;
 }
 
 .container {
@@ -46,7 +50,7 @@ body {
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-    background-color: #252323;
+    background-color: #0a0a12;
     font-family: var(--font-family);
     color: var(--text-color);
     z-index: 1;
@@ -88,7 +92,6 @@ div#header {
 li.nav-item {
     display: inline-block;
     font-weight: 700;
-    text-transform: uppercase;
     color: var(--text-color)!important;
     height: 60px;
     padding: 0 10px;
@@ -106,7 +109,6 @@ a.nav-link {
     padding: 0 10px;
     align-items: center;
     font-family: var(--font-family);
-    text-transform: uppercase;
     position: relative;
     -webkit-transition: all 1s ease 0s;
     -o-transition: all 1s ease 0s;
@@ -175,7 +177,6 @@ a.nav-link:hover {
     line-height: 18px;
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
     font-family: var(--font-family);
-    text-transform: uppercase;
 }
 
 .players a {
@@ -232,7 +233,6 @@ a.nav-link:hover {
 }
 
 .cyvers-info {
-    text-transform: uppercase !important;
     font-size: 9px !important;
     cursor: pointer;
     color: var(--text-color)!important;
@@ -247,6 +247,70 @@ a.nav-link:hover {
 
 cyvers-info a:hover {
     color: var(--text-color);
+}
+
+/* Flex container */
+.flex {
+    display: flex;
+}
+
+/* Flex direction column */
+.flex-col {
+    flex-direction: column;
+}
+
+.items-center {
+    align-items: center;
+}
+
+.guest-title {
+    font-size: 1rem;
+    font-weight: 600;
+
+}
+
+
+/* Gap between elements */
+.gap-4 {
+    gap: 1rem; /* This is equivalent to 16px, adjust to suit your design */
+}
+
+.title-main {
+    color: #FAFAFA;
+    font-weight: 700;
+    font-size: 1.6rem;
+}
+
+.description {
+    color: #FAFAFA;
+    font-weight: 700;
+    font-size: 1.15rem;
+    line-height: 2rem;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr 1fr; /* 1fr for normal columns, 2fr for wider columns */
+    gap: 1rem; /* If you want some space between the columns */
+}
+
+.p-5 {
+    padding: 1.25rem; /* This is equivalent to 20px; adjust as needed */
+}
+
+.grid-item {
+    background-color: #111117;
+    padding: 10px; /* Some inner space for your content */
+}
+
+.grid-item--large {
+    grid-column: span 2; /* Makes the middle column span two fractions, making it larger */
+}
+
+.line {
+    height: 1px;
+    background: #000; /* change this to whatever color you want the line to be */
+    width: 100%; /* adjust this to control the length of the line */
 }
 
 .euphoria-count {
@@ -272,17 +336,19 @@ cyvers-info a:hover {
 
 div#cyvers-container {
     padding: 10px;
-    border-radius: 4px;
+    border-radius: 6px;
     margin-top: -20px;
 }
 
 .navbar-default {
     background-color: var(--panel-heading);
     position: relative;
-    min-height: 60px;
-    border: 1px solid #333;
-    box-shadow: var(--box-shadow);
-    border-color: transparent;
+    min-height: 100px;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
 }
 
 .collapse.navbar-collapse {
@@ -291,6 +357,26 @@ div#cyvers-container {
 
 .nav.navbar-nav>li>a:hover {
     color: var(--main-color);
+}
+
+.radial-background {
+    width: 85rem;
+    height: 85rem;
+    position: absolute;
+    top: -50rem;
+    left: -55rem;
+    background: radial-gradient(50% 50% at 50% 50%, rgba(101, 89, 254, 0.27) 0%, rgba(101, 89, 254, 0) 100%);
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+
+.radial-background-2 {
+    width: 87rem;
+    height: 87rem;
+    position: absolute;
+    bottom: -20rem;
+    right: -70rem;
+    background: radial-gradient(50% 50% at 50% 50%, rgba(101, 89, 254, 0.27) 0%, rgba(101, 89, 254, 0) 100%);
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 }
 
 .navbar-nav {
@@ -302,9 +388,10 @@ div#cyvers-container {
 .nav.navbar-nav>li>a {
     color: #fff;
     height: 70px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    font: 23px Teko, sans-serif;
+    font-size: 1.125rem; /* 18px */
+    line-height: 1.75rem; /* 28px */
+    font-weight: 500;
+
     padding: 20px 15px;
     transition: all 1s ease 0s;
 }
@@ -345,7 +432,6 @@ div#cyvers-container {
     background: var(--panel-body);
     font-weight: 600;
     border-bottom: 1px solid #3e3b3b70;
-    text-transform: uppercase;
     text-align: center;
     padding: 15px;
     text-shadow: 1px 1px 1px var(--store);
@@ -372,7 +458,6 @@ div#cyvers-container {
 .panel-heading .header {
     background: #3b3939;
     font-weight: 600;
-    text-transform: uppercase;
     text-align: center;
     text-shadow: 1px 1px 1px #211616;
 }
@@ -384,7 +469,7 @@ div#cyvers-container {
 .donation-goal p {
     background: var(--panel-heading);
     width: 120px;
-    border-radius: 4px;
+    border-radius: 6px;
     margin-right: auto;
     margin-left: auto;
     font-size: 13px;
@@ -442,7 +527,7 @@ div#cyvers-container {
     margin-bottom: 2ch;
     box-shadow: var(--announce-shadow);
     padding: 15px 15px 15px 40px;
-    border-radius: 4px;
+    border-radius: 6px;
     background: var(--announce-bg);
     display: flex;
 }
@@ -597,6 +682,65 @@ p.footer-text {
     margin-bottom: 15px;
 }
 
+.modalContainer {
+    display: flex;
+    justify-content: center; /* Center the content horizontally */
+    align-items: center; /* Center the content vertically */
+    position: fixed; /* Fix the modal to the viewport */
+    top: 0;
+    left: 0;
+    width: 100%; /* Full viewport width */
+    height: 100%; /* Full viewport height */
+    /*background: rgba(0, 0, 0, 0.01); /* Semi-transparent black for dark theme */
+    overflow: auto; /* To enable scroll if content overflows */
+    z-index: 9999; /* High z-index to ensure the modal appears above all other content */
+}
+
+/* You may want to set explicit dimensions for the modal content, as well */
+.modal__header, .modal__body {
+    width: 100%;
+    margin: 0 auto; /* Center the content horizontally */
+}
+
+.modalBackground {
+    /* styles here */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.modalContent {
+    /* styles here */
+    position: relative;
+    max-width: 50%;
+    margin: 0 auto; /* Center the content horizontally */
+    /* Adjust position, width, and height to your liking */
+    border-radius: 0.75rem;
+    padding: 3rem 3rem;
+    background: rgba(16, 16, 18, 0.5);
+    backdrop-filter: blur(40px);
+}
+
+
+.close {
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 1em;
+    color: #000;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+/* Additional styling for the close button and modal header */
+.modal__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .footer #cp:hover {
     opacity: 0.8;
 }
@@ -626,7 +770,6 @@ p.footer-text {
 	font-size: 10px;
     font-family: var(--font-family);
 	font-weight: 700;
-	text-transform: uppercase;
 	display: inline-flex;
 	width: 100%;
 }
@@ -744,7 +887,7 @@ a.footer-store {
     white-space: nowrap;
     transition: background-color .25s ease;
     font-size: 13px;
-    border-radius: 4px;
+    border-radius: 6px;
     padding-top: 5px;
     padding-right: 10px;
     padding-bottom: 5px;
@@ -869,7 +1012,7 @@ element.style {
     padding-right: 15px;
     margin: 15px 6px;
     background: #4240406e;
-    border-radius: 4px;
+    border-radius: 6px;
     box-shadow: 1px 2px 1px #323236;
     margin-right: 20px!important;
 }
@@ -957,7 +1100,7 @@ h5 a {
     padding-right: 15px;
     margin: 15px 1px;
     background: #4240406e;
-    border-radius: 4px;
+    border-radius: 6px;
     box-shadow: 1px 2px 1px #323236;
 }
 
@@ -995,7 +1138,6 @@ h5 a {
     vertical-align: middle;
     font-size: 16px;
     color: white;
-    text-transform: uppercase;
     font-weight: 600;
     margin-left: 10px;
 }
@@ -1026,7 +1168,6 @@ h5 a {
 .euphoria-nav ul#euphoria-menu .dd-close a  {
     color: white;
     text-decoration: none;
-    text-transform: uppercase;
     font-size: 16px;
     font-weight: 600;
     line-height: 5;
@@ -1048,7 +1189,6 @@ h5 a {
     font-weight: 600;
     display: block;
     padding: 0px 10px;
-    text-transform: uppercase;
     line-height: 5;
     position: relative;
     }
@@ -1081,7 +1221,7 @@ h5 a {
 .euphoria-nav .euphoria-menu ul#euphoria-menu.open {
     right: 0px;
  	font-size: 0px;
-  	border-radius: 4px;
+  	border-radius: 6px;
 	padding: 0px 20px;
 	transition: 1s;
 	background: #383838;
@@ -1142,7 +1282,6 @@ html  {
 }
 
 .euphoria-nav .nav-link {
-    font-family: unset;
 }
 
 .euphoria-nav .nav-store {
@@ -1156,7 +1295,6 @@ html  {
     letter-spacing: 1px;
     padding: 10px 20px 10px 20px;
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
-    font-family: unset;
     -webkit-filter: unset;
 }
 
@@ -1222,6 +1360,7 @@ div#mobile-hide p {
     text-align-last: center;
     margin-right: auto;
     margin-left: auto;
+    font-weight: 900;
 }
 
 ul#euphoria-menu {
@@ -1241,7 +1380,7 @@ ul#euphoria-menu {
 @media screen and (min-width:  900px) {
 div#cyvers-container {
     padding: 10px;
-    border-radius: 4px;
+    border-radius: 6px;
     margin-top: -20px;
     width: 1140px;
 }
@@ -1441,7 +1580,7 @@ i.mdi.mdi-menu {
     padding-right: 15px;
     margin: 13px 1px;
     background: #4240406e;
-    border-radius: 4px;
+    border-radius: 6px;
     box-shadow: 1px 2px 1px #323236;
     padding-bottom: 10px;
 }
@@ -1462,7 +1601,6 @@ i.mdi.mdi-menu {
     background: var(--main-color);
     font-weight: 600;
     border-bottom: 2px solid rgba(0,0,0,.12);
-    text-transform: uppercase;
     text-align: center;
     padding: 15px;
     text-shadow: 1px 1px 1px #211616;
@@ -1509,7 +1647,7 @@ td.name {
     padding-right: 15px;
     margin: 15px 1px;
     background: #4240406e;
-    border-radius: 4px;
+    border-radius: 6px;
     box-shadow: 1px 2px 1px #323236;
     padding-bottom: 10px!important;
 }
@@ -1785,7 +1923,7 @@ button.swal-button.swal-button--confirm:focus {
     background-color: var(--panel-heading);
     border: 1px solid var(--panel-heading);
     border: 1px solid var(--panel-heading);
-    border-radius: 4px;
+    border-radius: 6px;
     -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
     background-clip: padding-box;
@@ -1846,8 +1984,7 @@ button.swal-button.swal-button--confirm:focus {
 
 button.basket-button.dropdown-toggle {
     background: transparent;
-    border-radius: 4px;
-    text-transform: uppercase;
+    border-radius: 6px;
     font-weight: 600;
     transition: 0.5s all;
     border: none;
@@ -1897,7 +2034,7 @@ div#player-name {
     color: var(--text-color);
     background: var(--main-color);
     padding: 1px 12px;
-    border-radius: 4px;
+    border-radius: 6px;
     margin-right: 10px;
     font-size: 16px;
 }
@@ -1912,7 +2049,7 @@ div#player-name {
     color: var(--text-color);
     background: var(--main-color);
     padding: 3px 13px;
-    border-radius: 4px;
+    border-radius: 6px;
     margin-right: 10px;
     font-weight: 500;
 }
@@ -1921,11 +2058,10 @@ div#player-name {
     color: var(--text-color);
     background: var(--main-color);
     padding: 8px 65px;
-    border-radius: 4px;
+    border-radius: 6px;
     margin-right: 10px;
     font-weight: 500;
     font-size: 16px;
-    text-transform: uppercase;
 }
 
 .login a.login-button:hover {
@@ -1969,7 +2105,7 @@ span.amount {
     font-size: 12px;
     background: var(--text-color);
     padding: 0px 6px;
-    border-radius: 4px;
+    border-radius: 6px;
     color: var(--main-color);
 }
 
@@ -2001,7 +2137,7 @@ span.amount {
     background-color: var(--panel-heading);
     border: 1px solid var(--panel-heading);
     border: 1px solid var(--panel-heading);
-    border-radius: 4px;
+    border-radius: 6px;
     -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
     background-clip: padding-box;
@@ -2084,7 +2220,7 @@ span.fa.fa-times {
     background-color: var(--panel-heading);
     border: 1px solid var(--panel-heading);
     border: 1px solid var(--panel-heading);
-    border-radius: 4px;
+    border-radius: 6px;
     -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
     background-clip: padding-box;
