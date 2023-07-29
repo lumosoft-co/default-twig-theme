@@ -2,49 +2,49 @@
 
 {% block content %}
 
-    <div class="body">
-        <div class="grid-container">
-            <div class="grid-item p-5">
-                {% if basket.username %}
-                <div class="cyvers-icon"><img src="https://minotar.net/cube/{{ basket.ign }}/40.png"></div>
-                <div class="logged">
-                    <div id="player-name">Welcome, {{ basket.ign }}</div>
-                    <div class="cyvers-button">
-                        <a href="/checkout/logout" class="login-button out">{{ __("Logout") }}</a>
-                        <a href="/checkout/basket" class="basket-button"><i class="mdi mdi-cart"></i></a>
-                    </div>
+<div class="body">
+    <div class="grid-container">
+        <div class="grid-item p-5">
+            {% if basket.username %}
+            <div class="cyvers-icon"><img src="https://minotar.net/cube/{{ basket.ign }}/40.png"></div>
+            <div class="logged">
+                <div id="player-name">Welcome, {{ basket.ign }}</div>
+                <div class="cyvers-button">
+                    <a href="/checkout/logout" class="login-button out">{{ __("Logout") }}</a>
+                    <a href="/checkout/basket" class="basket-button"><i class="mdi mdi-cart"></i></a>
                 </div>
-                {% else %}
-                <div class="flex flex-col gap-4 items-center">
-                    <div>
-                        <p class="guest-title">Guest</p>
-                        <div class="h-5"/>
-                        <p class="guest-title">Login to shop</p>
-                    </div>
+            </div>
+            {% else %}
+            <div class="flex flex-col gap-4 items-center">
+                <div>
+                    <p class="guest-title">Guest</p>
+                    <div class="h-5"/>
+                    <p class="guest-title">Login to shop</p>
                 </div>
-                <a href="/login" class="login-button">{{ __("Login") }}</a>
+            </div>
+            <a href="/login" class="login-button">{{ __("Login") }}</a>
+            {% endif %}
+        </div>
+        <div class="grid-item grid-item--large p-5">
+            <div class="flex flex-col gap-4">
+                <div class="title-main">
+                    Welcome to the {{store.name}} store!
+                </div>
+                {% if announcement %}
+                <div class="ads">
+                    <div class="announce-text"><i class="mdi mdi-comment-alert-outline"></i>{{announcement}}</div>
+                </div>
+                <div class="line"/>
                 {% endif %}
+                <p class="description">
+                    {{ index.description|raw }}
+                </p>
             </div>
-            <div class="grid-item grid-item--large p-5">
-                <div class="flex flex-col gap-4">
-                    <div class="title-main">
-                        Welcome to the {{store.name}} store!
-                    </div>
-                    {% if announcement %}
-                    <div class="ads">
-                        <div class="announce-text"><i class="mdi mdi-comment-alert-outline"></i>{{announcement}}</div>
-                    </div>
-                    <div class="line"/>
-                    {% endif %}
-                    <p class="description">
-                        {{ index.description|raw }}
-                    </p>
-                </div>
 
-            </div>
-            <div class="grid-item p-5">
-                {{ modules|raw }}
-            </div>
+        </div>
+        <div class="grid-item p-5">
+            {{ modules|raw }}
         </div>
     </div>
+</div>
 {% endblock %}
