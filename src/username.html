@@ -7,18 +7,18 @@
         </div>
         
         <div class="flex col-start-7 lg:col-start-4 col-span-full">
-            <div class="background-color py-4 px-8 rounded-lg border border-main w-full">
+            <div class="background-color py-4 px-8 rounded-lg border border-main w-full h-fit">
                 <p class="text-5xl main-header text-center text-white lg:text-left mt-4">
                     Login
                 </p>
-                {% if game == "minecraft" %}
-                <form method="post">
-                    <input type="text" name="ign" class="input-background border border-gray-300 text-white/80 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Enter your username" required>
-                    <button class="btn btn--primary cursorAura" type="submit">Login</button>
+                <div class="h-5"></div>
+                <form method="post" action="/login">
+                    <div class="flex flex-row gap-2 items-center">
+                        <input type="text" name="ign" class="input-background border input-border text-white/80 text-base rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full py-3 px-5" placeholder="Enter your username" required>
+                        <button type="submit" class="h-full text-gray-900 bg-gradient-to-r from-teal-200 to-lime-200 hover:bg-gradient-to-l hover:from-teal-200 hover:to-lime-200 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-teal-700 main-header text-lg rounded-lg text-sm py-3 px-5 text-center">Login</button>
+                    </div>
                 </form>
-                {% else %}
-                {{loginform|raw}}
-                {% endif %}
+                <div class="h-5"></div>
             </div>
         </div>
     </div>

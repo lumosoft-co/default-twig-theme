@@ -741,6 +741,10 @@ body {
   height: 11rem;
 }
 
+.h-5{
+  height: 1.25rem;
+}
+
 .h-6{
   height: 1.5rem;
 }
@@ -751,6 +755,11 @@ body {
 
 .h-\[36px\]{
   height: 36px;
+}
+
+.h-fit{
+  height: -moz-fit-content;
+  height: fit-content;
 }
 
 .h-full{
@@ -875,11 +884,6 @@ body {
   border-width: 1px;
 }
 
-.border-gray-300{
-  --tw-border-opacity: 1;
-  border-color: rgb(209 213 219 / var(--tw-border-opacity));
-}
-
 .bg-white{
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
@@ -902,14 +906,6 @@ body {
 .object-cover{
   -o-object-fit: cover;
      object-fit: cover;
-}
-
-.p-2{
-  padding: 0.5rem;
-}
-
-.p-2\.5{
-  padding: 0.625rem;
 }
 
 .p-4{
@@ -957,6 +953,11 @@ body {
 .py-2\.5{
   padding-top: 0.625rem;
   padding-bottom: 0.625rem;
+}
+
+.py-3{
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
 }
 
 .py-4{
@@ -1118,6 +1119,10 @@ div#header {
 
 .pulse {
   animation-duration: 5s !important;
+}
+
+.input-border {
+  border-color: #32324a;
 }
 
 .border-main {

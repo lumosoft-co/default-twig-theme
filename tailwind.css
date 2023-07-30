@@ -189,6 +189,10 @@
         animation-duration: 5s !important;
     }
 
+    .input-border {
+        border-color: #32324a;
+    }
+
     .cyvers-count {
         display: flex;
         align-items: flex-end;
