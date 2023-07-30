@@ -1,37 +1,40 @@
-<div class="panel panel-default module">
-    <div class="panel-heading">
-        <div class="mdi-badge"><i class="mdi mdi-medal"></i></div><span>{{ module.header }}</span></div>
-    <div class="panel-body">
+
+    <div class="relative rounded-lg h-44 top-donor p-5 border">
+        <div class="flex flex-row gap-2 items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" fill="currentColor" class="w-6 h-6 top-donor-icon-color">
+                <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd" />
+            </svg>
+            <span class="text-white text-xl main-header">
+                {{ module.header }}
+            </span>
+        </div>
         {% if module.donor %}
-          <div class="top-donator">
-              <div class="avatar">
-                <img src="{{ module.skin }}" width="40">
-              </div>
-              <div class="info">
-                <div class="ign">{{ module.ign }}</div>
-                <div class="amount">
-                    {% if module.displayAmount %}
-                        {{ __("Donated") }} {{ module.total|money }} <small>{{ store.currency }}</small>
-                    {% else %}
-                        {{ __("Donated the most ") }}
-                    {% endif %}
-                    
-                    {% if module.period == "hourly" %}
-                        {{ __("this hour.") }}
-                    {% elseif module.period == "daily" %}
-                        {{ __("today.") }}
-                    {% elseif module.period == "monthly" %}
-                        {{ __("this month.") }}
-                    {% elseif module.period == "yearly" %}
-                       {{ __("this year.") }}
-                    {% else %}
-                        {{ __("this week.") }}
-                    {% endif %}
-                </div>
-              </div>
-          </div>
-        {% else %}
-            {{ __("No recent top donator to display.") }}
+        <div class="overflow-hidden absolute top-16">
+            <img class="w-14" src="{{ module.skin }}" width="40">
+        </div>
+        <div class="flex flex-col font-bold mt-8 pl-16">
+            <span class="text-red-500">
+                {{ module.ign }}
+            </span>
+            <div class="opacity-60 text-xs text-white">
+                {% if module.displayAmount %}
+                {{ __("Donated") }} {{ module.total|money }} <small>{{ store.currency }}</small>
+                {% else %}
+                {{ __("Donated the most ") }}
+                {% endif %}
+
+                {% if module.period == "hourly" %}
+                {{ __("this hour.") }}
+                {% elseif module.period == "daily" %}
+                {{ __("today.") }}
+                {% elseif module.period == "monthly" %}
+                {{ __("this month.") }}
+                {% elseif module.period == "yearly" %}
+                {{ __("this year.") }}
+                {% else %}
+                {{ __("this week.") }}
+                {% endif %}
+            </div>
+        </div>
         {% endif %}
     </div>
-</div>

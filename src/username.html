@@ -1,33 +1,25 @@
 {% extends "layout.html" %}
 
 {% block content %}
-    <div class="body">
-        <div>
-            <div class="sidebar">
-                {{ modules|raw }}
-            </div>
+    <div class="relative ml-auto mr-auto max-w-[75rem] 2xl:max-w-[94rem] overflow-hidden mx-auto grid sm:grid-cols-1 lg:grid-cols-12 gap-5 mt-8">
+        <div class="flex flex-col gap-5 col-span-6 lg:col-span-3">
+            {{ modules|raw }}
         </div>
         
-        <div class="content">
-            <div class="featured">{{ modules|raw }}</div>
-            
-            <div class="panel">
-                <div class="panel__heading">
-                    <h1>Login</h1>
-                </div>
-                <div class="panel__body">
-                    {% if game == "minecraft" %}
-                        <form method="post">
-                            <div class="username">
-                                <input type="text" name="ign" class="input--900" placeholder="Enter your username">
-                                <button class="btn btn--primary cursorAura" type="submit">Login</button>
-                            </div>
-                        </form>
-                    {% else %}
-                        {{loginform|raw}}
-                    {% endif %}
-                </div>
-            </div> 
+        <div class="flex col-start-7 lg:col-start-4 col-span-full">
+            <div class="background-color py-4 px-8 rounded-lg border border-main w-full">
+                <p class="text-5xl main-header text-center text-white lg:text-left mt-4">
+                    Login
+                </p>
+                {% if game == "minecraft" %}
+                <form method="post">
+                    <input type="text" name="ign" class="input-background border border-gray-300 text-white/80 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Enter your username" required>
+                    <button class="btn btn--primary cursorAura" type="submit">Login</button>
+                </form>
+                {% else %}
+                {{loginform|raw}}
+                {% endif %}
+            </div>
         </div>
     </div>
 {% endblock %}

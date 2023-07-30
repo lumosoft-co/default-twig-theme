@@ -102,52 +102,47 @@
     </div>
 </div>
 
-
 <div class="container" id="cyvers-container">
-    <nav class="navbar navbar-default" role="navigation">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="/">{{ store.name }}</a>
-            </div>
-
-            <div class="collapse navbar-collapse">
-                <ul class="nav navbar-nav">
-                    <li class="{% if page.category == "index" %}active{% endif %}"><a href="/">{{ __("Home") }}</a></li>
-                    {% for category in store.categories %}
-                        {% if category.subcategories|length > 0 %}
-                        <li class="dropdown {% if category.active %}active{% endif %}">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ category.name }} <i
-                                        class="fa fa-caret-down"></i></a>
-                            <ul class="dropdown-menu">
-                                {% for subcategory in category.subcategories %}
-                                    <li><a href="/category/{{ subcategory.id }}">{{ subcategory.name }}</a></li>
-                                {% endfor %}
-                            </ul>
-                        {% else %}
-                            <li class="{% if category.active %}active{% endif %}"><a
-                                        href="/category/{{ category.id }}">{{ category.name }}</a></li>
-                        {% endif %}
-                    {% endfor %}
-                    {% for page in store.pages %}
-                        <li class="{% if page.active %}active{% endif %}"><a
-                                    href="/{{ page.slug }}">{{ page.title }}</a></li>
-                    {% endfor %}
-                    {% if basket.packages|length > 0 %}
-                        <li class="visible-xs {% if page.category == "checkout" %}active{% endif %}"><a
-                                    href="/checkout/basket">{{ __("Checkout") }}</a></li>
-                    {% endif %}
-                    {% if basket.username %}
-                        <li class="visible-xs"><a href="/checkout/logout">{{ __("Logout") }}</a></li>
-                    {% endif %}
-                </ul>
+    <div class="relative ml-auto mr-auto max-w-[75rem] 2xl:max-w-[94rem] mt-10">
+        <div class="mx-auto flex flex-col justify-center items-center rounded-lg flex gap-5 background-color py-15 border border-main">
+            <div class="flex mx-auto gap-4 rounded-lg p-6">
+                <li class="{% if page.category == "index" %}active{% endif %} flex flex-col relative">
+                <a href="/" class="flex text-sm text-white p-4 gap-3 duration-100 cursor-pointer rounded-lg hover:bg-gray-600 hover:bg-opacity-40">
+                    <span class="text-white text-xl self-center main-header">{{ __("Home") }}</span>
+                </a>
+                </li>
+                {% for category in store.categories %}
+                {% if category.subcategories|length > 0 %}
+                <li class="dropdown {% if category.active %}active{% endif %}">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ category.name }} <i
+                            class="fa fa-caret-down"></i></a>
+                    <ul class="dropdown-menu">
+                        {% for subcategory in category.subcategories %}
+                        <li><a href="/category/{{ subcategory.id }}">{{ subcategory.name }}</a></li>
+                        {% endfor %}
+                    </ul>
+                    {% else %}
+                <li class="{% if category.active %}active{% endif %} flex flex-col relative">
+                    <a href="/category/{{ category.id }}" class="flex text-sm text-white p-4 gap-3 duration-100 cursor-pointer rounded-lg hover:bg-gray-600 hover:bg-opacity-40">
+                        <span class="text-white text-xl self-center main-header">{{ category.name}}</span>
+                    </a>
+                </li>
+                {% endif %}
+                {% endfor %}
+                {% for page in store.pages %}
+                <li class="{% if page.active %}active{% endif %}"><a
+                        href="/{{ page.slug }}">{{ page.title }}</a></li>
+                {% endfor %}
+                {% if basket.packages|length > 0 %}
+                <li class="visible-xs {% if page.category == "checkout" %}active{% endif %}"><a
+                    href="/checkout/basket">{{ __("Checkout") }}</a></li>
+                {% endif %}
+                {% if basket.username %}
+                <li class="visible-xs"><a href="/checkout/logout">{{ __("Logout") }}</a></li>
+                {% endif %}
             </div>
         </div>
-    </nav>
+    </div>
     <div class="notification">
         {% if page.message.display %}
             <div class="alert alert-{{ page.message.type }} alert-dismissable">
@@ -160,19 +155,26 @@
     {% block content %}{% endblock %}
 </div>
 <!-- WEBSITE FOOTER -->
-<div class="aFooter">
-    <div class="container">
-        <div class="cyvers-cp p-body-inner" id="mobile-hide">
-            <div>
-                <p>&copy; {{store.name}} <span id="copyrightYear">2021</span></p>
-                <p>{{disclaimer}}</p>
-            </div>
-            <div class="f-right">
-                <p>Powered by <a href="https://agoramp.com">Agora</a></p>
-            </div>
-        </div>
+<footer class="rounded-lg shadow m-4 ml-auto mr-auto max-w-[75rem] 2xl:max-w-[94rem]">
+    <div class="w-full mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between">
+      <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2023 <a href="https://flowbite.com/" class="hover:underline main-header">{{ store.name }}</a>. <span>{{disclaimer}}</span>
+    </span>
+        <ul class="flex flex-wrap items-center mt-3 text-sm font-medium text-gray-500 dark:text-gray-400 sm:mt-0">
+            <li>
+                <a href="#" class="mr-4 hover:underline md:mr-6 ">About</a>
+            </li>
+            <li>
+                <a href="#" class="mr-4 hover:underline md:mr-6">Privacy Policy</a>
+            </li>
+            <li>
+                <a href="#" class="mr-4 hover:underline md:mr-6">Licensing</a>
+            </li>
+            <li>
+                <a href="#" class="hover:underline">Contact</a>
+            </li>
+        </ul>
     </div>
-</div>
+</footer>
 </div>
 
 
@@ -191,8 +193,6 @@
     });
 </script>
 
-
-<a href="javascript:" id="return-to-top"><i class="fa fa-chevron-up"></i></a>
 
 
 <script>
