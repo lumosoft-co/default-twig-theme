@@ -1,8 +1,25 @@
 {% extends "layout.html" %}
 
 {% block content %}
-	<div class="body">
-		<div class="content">
+	<div class="relative ml-auto mr-auto max-w-[75rem] 2xl:max-w-[94rem] overflow-hidden mx-auto grid sm:grid-cols-1 lg:grid-cols-12 gap-5 mt-8">
+		<div class="col-span-9 background-color rounded-lg border border-main h-fit py-4 px-8">
+			<p class="text-4xl main-header text-center text-white lg:text-left mt-4">
+				{{ category.name }}
+			</p>
+			{% if category.description != "" %}
+			<p class="text-lg opacity-80 text-white">
+				{{ category.description|raw }}
+			</p>
+			{% endif %}
+		</div>
+		<div class="p-5">
+			<div class="grid grid-cols-3 gap-5">
+				{% if category.packages|length > 0 %}
+
+				{% endif %}
+			</div>
+		</div>
+		<!--<div class="content">
 			{% if category.description != "" %}
 				<div class="panel panel-default">
 					<div class="panel-heading">{{ category.name }}    
@@ -90,7 +107,8 @@
 				</div>
 			</div>
 		</div>
-		<div class="sidebar">
+		-->
+		<div class="col-start-10 col-span-full flex flex-col gap-5">
 			{{ modules|raw }}
 		</div>
 	</div>
