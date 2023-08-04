@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 
 {% block content %}
-	<div class="relative ml-auto mr-auto max-w-[75rem] 2xl:max-w-[94rem] overflow-hidden mx-auto grid sm:grid-cols-1 lg:grid-cols-12 gap-5 mt-8">
+	<div class="relative ml-auto mr-auto max-w-[75rem] 2xl:max-w-[100rem] overflow-hidden mx-auto grid sm:grid-cols-1 lg:grid-cols-12 gap-5 mt-8">
 		<div class="col-span-9 flex flex-col">
 			<div class=" background-color rounded-tr-lg rounded-tl-lg border border-main h-fit py-4 px-8">
 				<p class="text-4xl main-header text-center text-white lg:text-left mt-4">
@@ -16,18 +16,50 @@
 			<div class="background-color rounded-br-lg rounded-bl-lg border-main border-b border-r border-l h-fit py-4 px-4">
 				<div class="p-3">
 					{% if category.packages|length > 0 %}
-					<div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
+					<div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
 							{% if category.displayType == "list" %}
-								{% for package in category.packages %}
-									<div class="w-full h-full rounded-lg border border-main input-background p-4 flex flex-col items-center">
-										<div class="flex flex-between">
+						{% for package in category.packages %}
+						<div class="w-full h-full rounded-lg border border-main input-background flex flex-col items-center relative">
+							{% if onSaleTag and package.discount.applied %}
+							<div class="flex absolute right-0 rounded-full h-[26px] w-fit space-x-1 px-3 py-0.5 text-sm items-center justify-between gap-2 border text-white pill-bg-announcement">
+								<div class="flex flex-row flex-1 gap-2 items-center justify-center text-sm main-header">
+									{{ __("On Sale") }}
+									<div class="relative flex h-2 w-2">
+                                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75">
 
-										</div>
+                                </span>
+										<span class="relative inline-flex rounded-full h-2 w-2 bg-white">
+
+                                </span>
 									</div>
-								{% endfor %}
+								</div>
+							</div>
+							{% endif %}
+							<div class="px-6 py-8  flex flex-col gap-8 rounded-b-lg">
+								<div class="flex justify-between gap-5 flex-row text-white main-header text-base">
+									<div class="text-white">{{ package.name[:20] }}</div>
+									<div class="opacity-70 text-right">
+										{% if package.customPrice == false and package.price > 0 %}
+										{% if package.discount.applied %}
+										<span class="line-through opacity-70">{{ package.discount.original|money }}</span>
+										{% endif %}
+										{{ package.price|money }} {{ basket.currency }}
+										{% endif %}
+									</div>
+								</div>
+
+								{% if package.basket %}
+								<a href="/checkout/packages/remove/{{ package.id }}" class="btn btn-sm btn-danger btn-block">{{ __("Remove") }}</a>
+								{% else %}
+								<a href="javascript::void(0);" class="h-full text-gray-900 bg-gradient-to-r from-teal-200 to-lime-200 hover:bg-gradient-to-l hover:from-teal-200 hover:to-lime-200 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-teal-700 main-header text-lg rounded-lg text-sm py-3 px-5 text-center">{{ __("Buy") }}</a>
+								{% endif %}
+
+							</div>
+						</div>
+						{% endfor %}
 							{% else %}
 								{% for package in category.packages %}
-									<div class="w-full h-full rounded-lg border border-main input-background flex flex-col items-center gap-8 pt-8 relative">
+									<div class="w-full h-[20rem] rounded-lg border border-main input-background flex flex-col items-center gap-8 pt-8 relative">
 										{% if onSaleTag and package.discount.applied %}
 										<div class="flex absolute right-0 rounded-full h-[26px] w-fit space-x-1 px-3 py-0.5 text-sm items-center justify-between gap-2 border text-white pill-bg-announcement">
 											<div class="flex flex-row flex-1 gap-2 items-center justify-center text-sm main-header">
@@ -44,13 +76,13 @@
 										</div>
 										{% endif %}
 										<img src="{{ package.image.url }}" class="w-14 h-14" title="{{ __("Click for more details") }}" />
-										<div class="px-6 py-8 bg-[#1a1a26] flex flex-col gap-8 rounded-b-lg bg-opacity-60">
+										<div class="px-6 py-8 bg-[#1a1a26] w-full  flex flex-col gap-8 rounded-b-lg bg-opacity-60">
 											<div class="flex justify-between flex-row text-white main-header text-base">
 												<div class="text-white">{{ package.name[:20] }}</div>
 												<div class="opacity-70 text-right">
 													{% if package.customPrice == false and package.price > 0 %}
 													{% if package.discount.applied %}
-													<span class="discount">{{ package.discount.original|money }}</span>
+													<span class="line-through opacity-70">{{ package.discount.original|money }}</span>
 													{% endif %}
 													{{ package.price|money }} {{ basket.currency }}
 													{% endif %}

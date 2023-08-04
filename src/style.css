@@ -769,6 +769,10 @@ body {
   height: 1.75rem;
 }
 
+.h-\[20rem\]{
+  height: 20rem;
+}
+
 .h-\[26px\]{
   height: 26px;
 }
@@ -1148,6 +1152,10 @@ body {
 
 .text-white\/80{
   color: rgb(255 255 255 / 0.8);
+}
+
+.line-through{
+  text-decoration-line: line-through;
 }
 
 .opacity-60{
@@ -2993,8 +3001,8 @@ span.label.label-success {
     grid-template-columns: repeat(12, minmax(0, 1fr));
   }
 
-  .lg\:grid-cols-3{
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+  .lg\:grid-cols-2{
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .lg\:text-left{
@@ -3003,6 +3011,10 @@ span.label.label-success {
 }
 
 @media (min-width: 1536px){
+  .\32xl\:max-w-\[100rem\]{
+    max-width: 100rem;
+  }
+
   .\32xl\:max-w-\[94rem\]{
     max-width: 94rem;
   }
