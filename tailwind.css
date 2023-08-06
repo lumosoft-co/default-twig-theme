@@ -12,7 +12,7 @@
         --text-color: #fff;
         --store: rgb(138, 50, 59);
         --footer-bg: #302e2e;
-        --panel-heading: #1a1a26;
+        --panel-heading: #1c1b1e;
         --panel-body: #1c1b1e;
         --box-shadow: 0 4px 0 hsla(210, 11%, 13%, 0.85);
         --announce-bg: #dc3545;
@@ -22,8 +22,8 @@
         --scrollbar-bg: #3f4045;
         --logo-height: 150px;
         --font-family: 'Montserrat', sans-serif;
-        --html-background: #13131d;
-        --border-color: #32324a;
+        --html-background: #17161a;
+        --border-color: #333333;
         --input-color: #13131d;
     }
 
@@ -58,7 +58,7 @@
         -moz-background-size: cover;
         -o-background-size: cover;
         background-size: cover;
-        background-color: #13131d;
+        background-color: #17161a;
         font-family: var(--font-family);
         color: var(--text-color);
         z-index: 1;
@@ -129,7 +129,7 @@
     }
 
     .announcement-bg {
-        background-color: #bb2e41;
+        background-color: #BB2E3AFF;
         border-color: #d56c7b;
     }
 
@@ -466,8 +466,11 @@
 
     .main-header {
         font-weight: 900;
-        font-style: italic;
         text-transform: uppercase;
+    }
+
+    .background-color-hover{
+        background-color: #242327;
     }
 
     .nav.navbar-nav > li > a {
