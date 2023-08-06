@@ -55,20 +55,25 @@
 {% block body %}
 <div class="modalContainer">
     <div class="modalBackground" data-dismiss="modal"></div>
-
-    <div class="modalContent ">
-        <div class="modal__header">
-            <h2>{{package.name}}</h2>
-            <button type="button" data-dismiss="modal" aria-hidden="true" class="iconBoxed iconBoxed--rounded btn--dark cursorAura cursorAura--dim">
-                <i class="fas fa-times"></i>
-            </button>
+    <div class="background-color border relative w-[40rem] auto rounded-lg border-main">
+        <div class="flex flex-row justify-between border-b border-main pb-5 p-5">
+            <span class="main-header text-white text-2xl">{{package.name}}</span>
+            <div data-dismiss="modal" class="input-background hover:cursor-pointer w-10 h-10 border border-main rounded-full flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="text-white w-4 h-4">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </div>
         </div>
-        {% if package.description|raw %}
-        <div class="modal__body markup__body">
-            {{ package.description|raw }}
+        <div class="p-5">
+            {% if package.description|raw %}
+            <div class="modal__body markup__body">
+                {{ package.description|raw }}
+            </div>
+            {% endif %}
         </div>
-        {% endif %}
-        {% include 'package_footer.html' %}
+        <div class="p-5 input-background border-t border-main rounded-b-lg">
+            {% include 'package_footer.html' %}
+        </div>
     </div>
 </div>
 

@@ -1,37 +1,44 @@
-<div class="modal__footer">
-    <!-- PRICE & BUTTONS -->
-    <div class="modal__price">
+
+<div class="w-full flex justify-between rounded-lg">
+    <div>
         <!-- DISPLAY PRICE -->
         {% if package.customPrice %}
-            <h3>Name your own price<h3>
-        {% elseif package.price == 0.00 %}
-            <h3>Free</h3>
-        {% else %}
-            <h3>{{ package.price|money }} {{ basket.currency }}</h3>
-        {% endif %}
-        
-        <!-- PURCHASE & GIFT BUTTON -->
+        <span class="main-header text-lg">Name your own price</span>
+            {% elseif package.price == 0.00 %}
+            <span class="main-header text-lg">Free</span>
+            {% else %}
+            <span class="main-header text-lg">{{ package.price|money }} {{ basket.currency }}</span>
+            {% endif %}
+    </div>
+    <div>
         {% if package.purchasable == false %}
-            <p>Not Purchasable</p>
+        <p class="text-red-500 font-bold text-base">Not Purchasable</p>
         {% else %}
-            <div class="modal__buttons">
-                {% if package.disable_gifting == false and package.storeGiftingEnabled %}
-                    <button class="btn btn--dark btn--gift cursorAura cursorAura--dim collapse" data-collapse="gift">Gift<i class="fas fa-chevron-down"></i></button>
-                {% endif %}
-                {% if package.basket %}
-                    <a href="/checkout/packages/remove/{{ package.id }}" class="btn btn--danger cursorAura btn--hideMobile">Remove</a>
-                    <a href="/checkout/packages/remove/{{ package.id }}" class="btn btn--danger iconBoxed iconBoxed--rounded btn--showMobile"><i class="fas fa-trash"></i></a>
-                {% else %}
-                    {% if package.type != "single" %}
-                        <a href="/checkout/packages/add/{{ package.id }}/subscribe" class="btn btn--primary cursorAura">Subscribe</a>
-                    {% endif %}
-                    {% if package.type != "subscription" %}
-                        <a href="/checkout/packages/add/{{ package.id }}/single" class="btn btn--primary cursorAura">Add to cart</a>
-                    {% endif %}
-                {% endif %}
-            </div>
+        <div class="modal__buttons">
+            {% if package.disable_gifting == false and package.storeGiftingEnabled %}
+            <button class="btn btn--dark btn--gift cursorAura cursorAura--dim collapse" data-collapse="gift">Gift<i class="fas fa-chevron-down"></i></button>
+            {% endif %}
+            {% if package.basket %}
+            <a href="/checkout/packages/remove/{{ package.id }}" class="flex flex-row gap-2 items-center h-full text-gray-900 bg-gradient-to-r from-teal-200 to-lime-200 hover:bg-gradient-to-l hover:from-teal-200 hover:to-lime-200 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-teal-700 main-header text-lg rounded-lg text-sm py-3 px-5 text-center">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+                </svg>
+
+                Remove
+            </a>
+            {% else %}
+            {% if package.type != "single" %}
+            <a href="/checkout/packages/add/{{ package.id }}/subscribe" class="h-full text-gray-900 bg-gradient-to-r from-teal-200 to-lime-200 hover:bg-gradient-to-l hover:from-teal-200 hover:to-lime-200 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-teal-700 main-header text-lg rounded-lg text-sm py-3 px-5 text-center">Subscribe</a>
+            {% endif %}
+            {% if package.type != "subscription" %}
+            <a href="/checkout/packages/add/{{ package.id }}/single" class="h-full text-gray-900 bg-gradient-to-r from-teal-200 to-lime-200 hover:bg-gradient-to-l hover:from-teal-200 hover:to-lime-200 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-teal-700 main-header text-lg rounded-lg text-sm py-3 px-5 text-center">Add to cart</a>
+            {% endif %}
+            {% endif %}
+        </div>
         {% endif %}
     </div>
+</div>
+<div class="modal__footer">
     
     <!-- GIFT COLLAPSIBLE -->
     {% if package.disable_gifting == false and package.storeGiftingEnabled %}

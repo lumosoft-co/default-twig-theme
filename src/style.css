@@ -636,12 +636,16 @@ body {
   position: relative;
 }
 
-.right-0{
-  right: 0px;
+.right-5{
+  right: 1.25rem;
 }
 
 .top-16{
   top: 4rem;
+}
+
+.top-5{
+  top: 1.25rem;
 }
 
 .col-span-6{
@@ -741,6 +745,10 @@ body {
   height: 0.25rem;
 }
 
+.h-10{
+  height: 2.5rem;
+}
+
 .h-14{
   height: 3.5rem;
 }
@@ -790,12 +798,20 @@ body {
   height: 100%;
 }
 
+.w-10{
+  width: 2.5rem;
+}
+
 .w-14{
   width: 3.5rem;
 }
 
 .w-2{
   width: 0.5rem;
+}
+
+.w-4{
+  width: 1rem;
 }
 
 .w-6{
@@ -808,6 +824,10 @@ body {
 
 .w-\[36px\]{
   width: 36px;
+}
+
+.w-\[40rem\]{
+  width: 40rem;
 }
 
 .w-fit{
@@ -953,9 +973,28 @@ body {
   border-right-width: 1px;
 }
 
+.border-t{
+  border-top-width: 1px;
+}
+
+.border-red-500{
+  --tw-border-opacity: 1;
+  border-color: rgb(239 68 68 / var(--tw-border-opacity));
+}
+
 .bg-\[\#1a1a26\]{
   --tw-bg-opacity: 1;
   background-color: rgb(26 26 38 / var(--tw-bg-opacity));
+}
+
+.bg-red-300{
+  --tw-bg-opacity: 1;
+  background-color: rgb(252 165 165 / var(--tw-bg-opacity));
+}
+
+.bg-red-800{
+  --tw-bg-opacity: 1;
+  background-color: rgb(153 27 27 / var(--tw-bg-opacity));
 }
 
 .bg-white{
@@ -1067,6 +1106,10 @@ body {
   padding-bottom: 2rem;
 }
 
+.pb-5{
+  padding-bottom: 1.25rem;
+}
+
 .pl-16{
   padding-left: 4rem;
 }
@@ -1081,6 +1124,11 @@ body {
 
 .text-right{
   text-align: right;
+}
+
+.text-2xl{
+  font-size: 1.5rem;
+  line-height: 2rem;
 }
 
 .text-4xl{
@@ -1138,6 +1186,11 @@ body {
 .text-gray-900{
   --tw-text-opacity: 1;
   color: rgb(17 24 39 / var(--tw-text-opacity));
+}
+
+.text-red-300{
+  --tw-text-opacity: 1;
+  color: rgb(252 165 165 / var(--tw-text-opacity));
 }
 
 .text-red-500{
@@ -1665,7 +1718,8 @@ a:hover, a:focus {
   /* Full viewport width */
   height: 100%;
   /* Full viewport height */
-  /*background: rgba(0, 0, 0, 0.01); /* Semi-transparent black for dark theme */
+  background: rgba(0, 0, 0, 0.01);
+  /* Semi-transparent black for dark theme */
   overflow: auto;
   /* To enable scroll if content overflows */
   z-index: 9999;
@@ -1689,20 +1743,6 @@ a:hover, a:focus {
   height: 100%;
 }
 
-.modalContent {
-  /* styles here */
-  position: relative;
-  max-width: 50%;
-  margin: 0 auto;
-  /* Center the content horizontally */
-  /* Adjust position, width, and height to your liking */
-  border-radius: 0.75rem;
-  padding: 3rem 3rem;
-  background: rgba(16, 16, 18, 0.5);
-  -webkit-backdrop-filter: blur(40px);
-          backdrop-filter: blur(40px);
-}
-
 .close {
   position: absolute;
   right: 0;
@@ -1714,12 +1754,6 @@ a:hover, a:focus {
 }
 
 /* Additional styling for the close button and modal header */
-
-.modal__header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
 
 .footer #cp:hover {
   opacity: 0.8;
@@ -2900,6 +2934,10 @@ span.label.label-success {
 
 .hover\:underline:hover{
   text-decoration-line: underline;
+}
+
+.hover\:input-background-hover:hover {
+  background-color: #161621;
 }
 
 .hover\:announcement-bg-hover:hover {

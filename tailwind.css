@@ -116,6 +116,10 @@
         background-color: var(--input-color);
     }
 
+    .input-background-hover {
+        background-color: #161621;
+    }
+
     .top-donor {
         background-color: #c850de;
         border-color: #db8dea;
@@ -143,6 +147,7 @@
     .announcement-bg-hover {
         background-color: #c03649;
     }
+
 
 
     a.nav-link {
@@ -748,7 +753,7 @@
         left: 0;
         width: 100%; /* Full viewport width */
         height: 100%; /* Full viewport height */
-        /*background: rgba(0, 0, 0, 0.01); /* Semi-transparent black for dark theme */
+        background: rgba(0, 0, 0, 0.01); /* Semi-transparent black for dark theme */
         overflow: auto; /* To enable scroll if content overflows */
         z-index: 9999; /* High z-index to ensure the modal appears above all other content */
     }
