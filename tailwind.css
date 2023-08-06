@@ -121,17 +121,36 @@
     }
 
     .top-donor {
-        background-color: #c850de;
-        border-color: #db8dea;
+        border-color: #b28dea;
     }
 
     .top-donor-icon-color {
-        color: #783085;
+        color: #523085;
     }
 
     .announcement-bg {
         background-color: #bb2e41;
         border-color: #d56c7b;
+    }
+
+    .secondary-color-text {
+        color: #a9f7d2
+    }
+
+    .mesh-background {
+        background-color:#ff99df;
+        background-image:
+                radial-gradient(at 88% 47%, hsla(252,74%,69%,1) 0px, transparent 50%),
+                radial-gradient(at 96% 77%, hsla(343,83%,61%,1) 0px, transparent 50%),
+                radial-gradient(at 72% 6%, hsla(219,66%,64%,1) 0px, transparent 50%),
+                radial-gradient(at 97% 62%, hsla(258,72%,75%,1) 0px, transparent 50%),
+                radial-gradient(at 41% 11%, hsla(272,91%,74%,1) 0px, transparent 50%),
+                radial-gradient(at 31% 68%, hsla(246,61%,74%,1) 0px, transparent 50%),
+                radial-gradient(at 40% 67%, hsla(71,68%,70%,1) 0px, transparent 50%);
+    }
+
+    .secondary-color-bg {
+        background-color: #a9f7d2
     }
 
     .ping-bg-announcement {
@@ -421,10 +440,11 @@
         width: 85rem;
         height: 85rem;
         position: absolute;
-        top: -50rem;
-        left: -55rem;
+        bottom: -35rem;
+        left: -65rem;
         background: radial-gradient(50% 50% at 50% 50%, rgba(101, 89, 254, 0.27) 0%, rgba(101, 89, 254, 0) 100%);
         filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+        z-index: 10;
     }
 
     .radial-background-2 {
@@ -435,6 +455,7 @@
         right: -70rem;
         background: radial-gradient(50% 50% at 50% 50%, rgba(101, 89, 254, 0.27) 0%, rgba(101, 89, 254, 0) 100%);
         filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+        z-index: 10;
     }
 
     .navbar-nav {
