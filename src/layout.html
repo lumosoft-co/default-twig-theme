@@ -74,7 +74,7 @@
           <div class="bg-[#1a1a26] bg-opacity-80 w-full border-t border-b border-main py-8">
     <div class="relative ml-auto mr-auto w-[75rem] flex justify-between flex-row items-center">
         {% if server %}
-        <div class="flex flex-row gap-3 h-14">
+        <div class="flex flex-row gap-3 h-14 hover:cursor-pointer" data-clipboard-text="{{server}}" id="serverLink">
             <div class="flex flex-col gap-2">
                 <h2 id="serverText" data-ip="{{server}}" class="main-header text-xl text-pink-500">
                     {{server}}

@@ -7,10 +7,13 @@
         <div class="relative col-span-6 lg:col-span-3">
             <div class="background-color border border-main p-5 rounded-lg flex flex-col">
                 <div class="flex flex-row gap-2 items-center">
+                    {% if basket.username %}
+                    <img src="https://mc-heads.net/avatar/{{ basket.ign }}"/>
+                    {% else %}
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
                         <path d="M2.25 2.25a.75.75 0 000 1.5h1.386c.17 0 .318.114.362.278l2.558 9.592a3.752 3.752 0 00-2.806 3.63c0 .414.336.75.75.75h15.75a.75.75 0 000-1.5H5.378A2.25 2.25 0 017.5 15h11.218a.75.75 0 00.674-.421 60.358 60.358 0 002.96-7.228.75.75 0 00-.525-.965A60.864 60.864 0 005.68 4.509l-.232-.867A1.875 1.875 0 003.636 2.25H2.25zM3.75 20.25a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zM16.5 20.25a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0z" />
                     </svg>
-
+                    {% endif %}
                     <span class="text-white text-xl main-header">
                     {% if basket.username %}
                     Welcome, {{ basket.ign }}
@@ -25,14 +28,16 @@
                 </p>
                 <div class="h-4"></div>
                 {% if basket.username %}
-                <div class="cyvers-icon"><img src="https://minotar.net/cube/{{ basket.ign }}/40.png"></div>
+                <a href="/checkout/logout" class="w-full text-gray-900 bg-gradient-to-r from-teal-200 to-lime-200 hover:bg-gradient-to-l hover:from-teal-200 hover:to-lime-200 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-teal-700 font-semibold rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Logout</a>
+                <!--<img src="https://mc-heads.net/body/{{ basket.ign }}/right">
+                <div class="cyvers-icon"><img src="https://mc-heads.net/body/{{ basket.ign }}/right"></div>
                 <div class="logged">
                     <div id="player-name">Welcome, {{ basket.ign }}</div>
                     <div class="cyvers-button">
                         <a href="/checkout/logout" class="login-button out">{{ __("Logout") }}</a>
                         <a href="/checkout/basket" class="basket-button"><i class="mdi mdi-cart"></i></a>
                     </div>
-                </div>
+                </div>-->
                 {% else %}
                 <a href="/login" class="w-full text-gray-900 bg-gradient-to-r from-teal-200 to-lime-200 hover:bg-gradient-to-l hover:from-teal-200 hover:to-lime-200 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-teal-700 font-semibold rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Login!</a>
                 {% endif %}
