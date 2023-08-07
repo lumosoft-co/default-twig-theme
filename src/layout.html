@@ -222,23 +222,36 @@
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
             </svg></button>
             <!-- Dropdown menu -->
-            <div id="dropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
-                <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
-                    <li>
-                        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</a>
+            <div id="dropdown" class="z-10 hidden divide-y divide-gray-100 rounded-lg shadow w-44 border border-main backdrop-blur-3xl">
+                <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" data-toggle="currency">
+                    {% for currency in store.currencies %}
+                    {% if currency.code in [store.currency, "AUD", "BRL", "CAD", "DKK", "EUR", "NOK", "NZD", "GBP", "SEK", "USD", "PLN"] %}
+                    <li {% if basket.currency == currency.code %}class="active"{% endif %}>
+                        <a class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white main-header" href="?currency={{ currency.code }}">{{ currency.code }}</a>
                     </li>
-                    <li>
-                        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Settings</a>
-                    </li>
-                    <li>
-                        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Earnings</a>
-                    </li>
-                    <li>
-                        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Sign out</a>
-                    </li>
+                    {% endif %}
+                    {% endfor %}
                 </ul>
             </div>
         </div>
+    </div>
+    <div class="h-5"></div>
+    <div class="flex flex-col gap-5">
+        {% for package in basket.packages %}
+        <form method="post" action="/checkout/update" id="package--{{package.id}}">
+            <div class="w-full input-background border border-main p-5 flex justify-between">
+                <div class="flex flex-col gap-2">
+                    <h3 class="main-header text-white text-base">{{ package.name[:25] }}</h3>
+                    <span class="font-bold text-base main-header opacity-80">{{ package.price|money }} {{ basket.currency }}</span>
+                </div>
+                <div class="package__buttons">
+                    <button onclick="subtractPackage({{package.id}})" class="iconBoxed iconBoxed--rounded package__remove cursorAura" ><i class="fas fa-minus"></i></button>
+                    <input type="text" class="package__quantity" name="quantity[{{ package.id }}]" value="{{ package.quantity }}" {% if package.price == 0.00 or package.disableQuantity %}disabled="disabled"{% endif %} maxlength="3"/>
+                    <a href="/checkout/packages/add/{{ package.id }}" class="iconBoxed iconBoxed--rounded package__add cursorAura"><i class="fas fa-plus"></i></a>
+                </div>
+            </div>
+        </form>
+        {% endfor %}
     </div>
     <button type="button" data-drawer-hide="drawer-navigation" aria-controls="drawer-navigation" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 absolute top-2.5 right-2.5 inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" >
         <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
