@@ -82,12 +82,6 @@
         height: 380px;
     }
 
-    @media (min-width: 768px) {
-        .header {
-            margin: 0 !important;
-        }
-    }
-
     .euphoria-nav {
         background: rgba(56, 56, 56, 0.37);
         padding: 0px;
@@ -2081,10 +2075,9 @@
         border-bottom: 2px solid var(--main-color);
     }
 
-
-    .basket {
-        align-self: center;
-        float: right;
+    .menuWrapper--open {
+        width: 500px;
+        opacity: 1;
     }
 
     button.basket-button.dropdown-toggle {
