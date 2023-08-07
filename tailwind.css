@@ -24,7 +24,7 @@
         --font-family: 'Montserrat', sans-serif;
         --html-background: #17161a;
         --border-color: #333333;
-        --input-color: #13131d;
+        --input-color: #121215;
     }
 
     html,
@@ -467,6 +467,7 @@
     .main-header {
         font-weight: 900;
         text-transform: uppercase;
+        font-style: italic;
     }
 
     .background-color-hover{

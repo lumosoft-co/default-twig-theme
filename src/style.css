@@ -454,7 +454,7 @@ video {
   --font-family: 'Montserrat', sans-serif;
   --html-background: #17161a;
   --border-color: #333333;
-  --input-color: #13131d;
+  --input-color: #121215;
 }
 
 html,
@@ -640,8 +640,8 @@ body {
   right: 1.25rem;
 }
 
-.top-16{
-  top: 4rem;
+.top-2{
+  top: 0.5rem;
 }
 
 .top-5{
@@ -785,6 +785,10 @@ body {
   height: 1.75rem;
 }
 
+.h-\[10rem\]{
+  height: 10rem;
+}
+
 .h-\[20rem\]{
   height: 20rem;
 }
@@ -842,8 +846,16 @@ body {
   width: 40rem;
 }
 
+.w-\[5rem\]{
+  width: 5rem;
+}
+
 .w-\[75rem\]{
   width: 75rem;
+}
+
+.w-\[8rem\]{
+  width: 8rem;
 }
 
 .w-fit{
@@ -912,6 +924,14 @@ body {
 
 .justify-between{
   justify-content: space-between;
+}
+
+.gap-1{
+  gap: 0.25rem;
+}
+
+.gap-10{
+  gap: 2.5rem;
 }
 
 .gap-2{
@@ -1002,14 +1022,9 @@ body {
   border-color: rgb(239 68 68 / var(--tw-border-opacity));
 }
 
-.bg-\[\#1a1a26\]{
+.bg-\[\#1c1c21\]{
   --tw-bg-opacity: 1;
-  background-color: rgb(26 26 38 / var(--tw-bg-opacity));
-}
-
-.bg-\[\#1c1b1e\]{
-  --tw-bg-opacity: 1;
-  background-color: rgb(28 27 30 / var(--tw-bg-opacity));
+  background-color: rgb(28 28 33 / var(--tw-bg-opacity));
 }
 
 .bg-black\/20{
@@ -1153,10 +1168,6 @@ body {
   padding-bottom: 1.25rem;
 }
 
-.pl-16{
-  padding-left: 4rem;
-}
-
 .pt-8{
   padding-top: 2rem;
 }
@@ -1202,11 +1213,6 @@ body {
 .text-xl{
   font-size: 1.25rem;
   line-height: 1.75rem;
-}
-
-.text-xs{
-  font-size: 0.75rem;
-  line-height: 1rem;
 }
 
 .font-bold{
@@ -1266,10 +1272,6 @@ body {
 
 .line-through{
   text-decoration-line: line-through;
-}
-
-.opacity-60{
-  opacity: 0.6;
 }
 
 .opacity-70{
@@ -1358,6 +1360,16 @@ div#header {
   border-color: var(--border-color);
 }
 
+.left i {
+  float: right;
+  height: 40px;
+  width: 40px;
+  margin-left: 10px;
+  font-size: 40px;
+  margin-top: -10px;
+  color: var(--main-color);
+}
+
 .right i {
   float: left;
   height: 40px;
@@ -1383,6 +1395,27 @@ div#header {
 
 .players a:hover {
   color: var(--text-color);
+}
+
+.left {
+  float: left;
+  position: relative;
+  bottom: -10px;
+  text-align: left;
+  box-shadow: 0 5px 8px rgba(0, 0, 0, 0.08);
+  border-radius: 5px;
+  padding: 10px 10px 10px 10px;
+  width: 250px;
+  height: 60px;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.02);
+  transition: all 1s cubic-bezier(0.33, 0.74, 0.28, 0.82) !important;
+  margin-top: 17.5ch;
+}
+
+.left:hover {
+  bottom: 2px;
+  transition: var(--count-transition);
 }
 
 .right {
@@ -1497,6 +1530,7 @@ div#cyvers-container {
 .main-header {
   font-weight: 900;
   text-transform: uppercase;
+  font-style: italic;
 }
 
 .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
