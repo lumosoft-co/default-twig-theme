@@ -70,9 +70,9 @@
   <div class=" w-full h-full">
       <div class="w-full h-full relative backdrop-blur-3xl bg-black/20 z-[100] border-main border-b flex items-center justify-center">
           <div class=" bg-opacity-80 w-full border-main py-8">
-    <div class="relative ml-auto mr-auto w-[75rem] flex justify-between flex-row items-center">
+    <div class="relative flex justify-evenly flex-row items-center">
         {% if server %}
-        <div class="flex flex-row gap-3 h-14 hover:cursor-pointer" data-clipboard-text="{{server}}" id="serverLink">
+        <div class="hide md:showFlex flex-row gap-3 h-14 hover:cursor-pointer" data-clipboard-text="{{server}}" id="serverLink">
             <div class="flex flex-col gap-2">
                 <h2 id="serverText" data-ip="{{server}}" class="main-header text-xl text-pink-500">
                     {{server}}
@@ -94,7 +94,7 @@
         {% else %}
         <div></div>
         {% endif %}
-        <div class="flex items-center justify-center w-[10rem]">
+        <div class="flex items-center justify-center w-[20rem]">
             {% if store.logo %}
             <a class="" href="/"><img src="{{ store.logo }}"/></a>
             {% else %}
@@ -102,7 +102,7 @@
             {% endif %}
         </div>
         {% if discord %}
-        <a href="{{discord}}" class="flex flex-row gap-3 h-14" id="discordLink" target="_blank">
+        <a href="{{discord}}" class="hide md:showFlex flex-row gap-3 h-14" id="discordLink" target="_blank">
             <div class="bg-purple-500 rounded-lg h-full aspect-square flex items-center justify-center">
                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="24" viewBox="0 0 24 24"><defs><clipPath id="b"><rect width="24" height="24"/></clipPath></defs><g id="a" clip-path="url(#b)"><g transform="translate(0 2.905)"><g transform="translate(0)"><g transform="translate(0)"><path d="M20.33,1.523A19.849,19.849,0,0,0,15.379,0a13.6,13.6,0,0,0-.634,1.289,18.439,18.439,0,0,0-5.5,0A13.661,13.661,0,0,0,8.615,0,19.989,19.989,0,0,0,3.66,1.527,20,20,0,0,0,.1,15.141h0A19.958,19.958,0,0,0,6.175,18.19a14.667,14.667,0,0,0,1.3-2.1,12.915,12.915,0,0,1-2.048-.978c.172-.125.34-.253.5-.378a14.265,14.265,0,0,0,12.142,0c.164.134.332.262.5.378a12.965,12.965,0,0,1-2.052.98,14.534,14.534,0,0,0,1.3,2.1A19.868,19.868,0,0,0,23.9,15.143h0A19.993,19.993,0,0,0,20.33,1.523ZM8.013,12.4A2.3,2.3,0,0,1,5.852,10,2.281,2.281,0,0,1,8.009,7.6,2.272,2.272,0,0,1,10.173,10,2.292,2.292,0,0,1,8.013,12.4Zm7.974,0a2.292,2.292,0,0,1-2.16-2.4,2.281,2.281,0,0,1,2.16-2.4A2.266,2.266,0,0,1,18.144,10,2.291,2.291,0,0,1,15.987,12.4Z" transform="translate(0)" fill="#fff"/></g></g></g></g></svg>
             </div>
@@ -124,10 +124,10 @@
       </div>
 </div>
 
-<div class="container" id="cyvers-container">
-   <div class="md:block relative ml-auto mr-auto max-w-[75rem] 2xl:max-w-[94rem] mt-10 z-[100]">
+<div class="px-[2rem] md:px-[4rem]">
+   <div class="md:block relative mt-10 z-[100]">
        <div class="mx-auto flex flex-row justify-between gap-4 rounded-lg flex gap-5 background-color border border-main p-6 items-center">
-           <div class="flex flex-row gap-4 rounded-lg">
+           <div class="flex-row gap-4 rounded-lg hide md:showFlex">
                <li class="{% if page.category == "index" %}active{% endif %} flex flex-col relative">
                <a href="/" class="flex text-sm text-white p-4 gap-3 duration-100 cursor-pointer rounded-lg hover:bg-gray-600 hover:bg-opacity-40">
                    <span class="text-white text-xl self-center main-header">{{ __("Home") }}</span>
@@ -155,43 +155,41 @@
                <li class="{% if page.active %}active{% endif %}"><a
                        href="/{{ page.slug }}">{{ page.title }}</a></li>
                {% endfor %}
-               {% if basket.packages|length > 0 %}
-               <li class="visible-xs {% if page.category == "checkout" %}active{% endif %}"><a
-                   href="/checkout/basket">{{ __("Checkout") }}</a></li>
-               {% endif %}
+           </div>
+           <div class="md:hidden flex flex-row flex-1 justify-between items-center">
+               <button class="text-white" type="button" data-drawer-target="drawer-navigation" data-drawer-show="drawer-navigation" aria-controls="drawer-navigation">
+                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                       <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                   </svg>
+               </button>
                {% if basket.username %}
-               <li class="visible-xs"><a href="/checkout/logout">{{ __("Logout") }}</a></li>
+               <button type="button" data-drawer-target="drawer-navigation" data-drawer-show="drawer-navigation" aria-controls="drawer-navigation" class="rounded-lg border border-main bg-gradient-to-r from-teal-200 to-lime-200 flex flex-row justify-between gap-10">
+                   <div class="p-5">
+                       <div class="flex flex-col gap-1">
+                           <div class="flex flex-row gap-2 items-center">
+                               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="text-black/70 w-6 h-6">
+                                   <path d="M2.25 2.25a.75.75 0 000 1.5h1.386c.17 0 .318.114.362.278l2.558 9.592a3.752 3.752 0 00-2.806 3.63c0 .414.336.75.75.75h15.75a.75.75 0 000-1.5H5.378A2.25 2.25 0 017.5 15h11.218a.75.75 0 00.674-.421 60.358 60.358 0 002.96-7.228.75.75 0 00-.525-.965A60.864 60.864 0 005.68 4.509l-.232-.867A1.875 1.875 0 003.636 2.25H2.25zM3.75 20.25a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zM16.5 20.25a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0z" />
+                               </svg>
+
+                               <span class="main-header text-black/70 ">View Cart ({{ basket.packages|length }})</span>
+                           </div>
+                       </div>
+                   </div>
+                   <div class="relative w-[5rem] overflow-hidden">
+                       <img class="h-[10rem] absolute top-2" src="https://mc-heads.net/body/{{basket.uuid}}/left"/>
+                   </div>
+               </button>
+               {% else %}
+               <button class="px-4 py-2 border border-main flex flex-col gap-2 rounded-lg hover:cursor-pointer hover:background-color-hover duration-100" onclick="window.location.pathname = 'login'">
+                   <div class="flex flex-row gap-2 items-center">
+                       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class=" w-6 h-6">
+                           <path d="M2.25 2.25a.75.75 0 000 1.5h1.386c.17 0 .318.114.362.278l2.558 9.592a3.752 3.752 0 00-2.806 3.63c0 .414.336.75.75.75h15.75a.75.75 0 000-1.5H5.378A2.25 2.25 0 017.5 15h11.218a.75.75 0 00.674-.421 60.358 60.358 0 002.96-7.228.75.75 0 00-.525-.965A60.864 60.864 0 005.68 4.509l-.232-.867A1.875 1.875 0 003.636 2.25H2.25zM3.75 20.25a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zM16.5 20.25a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0z" />
+                       </svg>
+                       <span class="main-header text-white text-lg">Login</span>
+                   </div>
+               </button>
                {% endif %}
            </div>
-           {% if basket.username %}
-           <button type="button" data-drawer-target="drawer-navigation" data-drawer-show="drawer-navigation" aria-controls="drawer-navigation" class="rounded-lg border border-main bg-gradient-to-r from-teal-200 to-lime-200 flex flex-row justify-between gap-10">
-               <div class="p-5">
-                   <div class="flex flex-col gap-1">
-                       <div class="flex flex-row gap-2 items-center">
-                           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="text-black/70 w-6 h-6">
-                               <path d="M2.25 2.25a.75.75 0 000 1.5h1.386c.17 0 .318.114.362.278l2.558 9.592a3.752 3.752 0 00-2.806 3.63c0 .414.336.75.75.75h15.75a.75.75 0 000-1.5H5.378A2.25 2.25 0 017.5 15h11.218a.75.75 0 00.674-.421 60.358 60.358 0 002.96-7.228.75.75 0 00-.525-.965A60.864 60.864 0 005.68 4.509l-.232-.867A1.875 1.875 0 003.636 2.25H2.25zM3.75 20.25a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zM16.5 20.25a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0z" />
-                           </svg>
-
-                           <span class="main-header text-black/70 ">View Cart</span>
-                       </div>
-                       <span class="text-black/70 text-sm font-medium">{%if basket.packages|length > 0 %}{{ basket.packages|length }} item{%if basket.packages|length > 1 %}s{%endif%} - {{ basket.price|money }} {{basket.currency}}{%else%}No items in cart!{%endif%}</span>
-                   </div>
-               </div>
-               <div class="relative w-[5rem] overflow-hidden">
-                   <img class="h-[10rem] absolute top-2" src="https://mc-heads.net/body/{{basket.uuid}}/left"/>
-               </div>
-           </button>
-           {% else %}
-           <button class="p-5 border border-main flex flex-col gap-2 rounded-lg hover:cursor-pointer hover:background-color-hover duration-100" onclick="window.location.pathname = 'login'">
-                <div class="flex flex-row gap-2 items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class=" w-6 h-6">
-                        <path d="M2.25 2.25a.75.75 0 000 1.5h1.386c.17 0 .318.114.362.278l2.558 9.592a3.752 3.752 0 00-2.806 3.63c0 .414.336.75.75.75h15.75a.75.75 0 000-1.5H5.378A2.25 2.25 0 017.5 15h11.218a.75.75 0 00.674-.421 60.358 60.358 0 002.96-7.228.75.75 0 00-.525-.965A60.864 60.864 0 005.68 4.509l-.232-.867A1.875 1.875 0 003.636 2.25H2.25zM3.75 20.25a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zM16.5 20.25a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0z" />
-                    </svg>
-                    <span class="main-header text-white text-lg">Login</span>
-                </div>
-                <p class="text-base font-medium opacity-80">Start shopping!</p>
-           </button>
-           {% endif %}
        </div>
    </div>
    <div class="notification">
@@ -204,13 +202,6 @@
    </div>
 
    {% block content %}{% endblock %}
-</div>
-
-<!-- drawer init and show -->
-<div class="text-center">
-    <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" type="button" data-drawer-target="drawer-navigation" data-drawer-show="drawer-navigation" aria-controls="drawer-navigation">
-        Show navigation
-    </button>
 </div>
 
 <!-- drawer component -->
@@ -261,7 +252,7 @@
 
 
 <!-- WEBSITE FOOTER -->
-<footer class="rounded-lg shadow m-4 ml-auto mr-auto max-w-[75rem] 2xl:max-w-[94rem]">
+<footer class="rounded-lg shadow m-4">
     <div class="w-full mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between">
       <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2023 <a href="https://flowbite.com/" class="hover:underline main-header">{{ store.name }}</a>. <span>{{disclaimer}}</span>
     </span>

@@ -1,8 +1,9 @@
 {% extends "layout.html" %}
 
 {% block content %}
-	<div class="z-[100] relative ml-auto mr-auto max-w-[75rem] 2xl:max-w-[100rem] overflow-hidden mx-auto grid sm:grid-cols-1 lg:grid-cols-12 gap-5 mt-8">
-		<div class="col-span-9 flex flex-col">
+	<div class="z-[100] relative w-full flex flex-row overflow-hidden gap-5 mt-8">
+		{{ include('login.html') }}
+		<div class="flex flex-col flex-1">
 			<div class=" background-color rounded-tr-lg rounded-tl-lg border border-main h-fit py-4 px-8">
 				<p class="text-4xl main-header text-center text-white lg:text-left mt-4">
 					{{ category.name }}
@@ -16,7 +17,7 @@
 			<div class="background-color rounded-br-lg rounded-bl-lg border-main border-b border-r border-l h-fit py-4 px-4">
 				<div class="p-3">
 					{% if category.packages|length > 0 %}
-					<div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+					<div class="grid md:grid-cols-3 gap-5">
 							{% if category.displayType == "list" %}
 						{% for package in category.packages %}
 						<div class="w-full h-full rounded-lg border border-main input-background flex flex-col items-center relative justify-center hover:cursor-pointer hover:input-background-hover duration-100">
@@ -116,97 +117,6 @@
 				</div>
 			</div>
 		</div>
-		<!--<div class="content">
-			{% if category.description != "" %}
-				<div class="panel panel-default">
-					<div class="panel-heading">{{ category.name }}    
-					<div class="cart"><a href="/checkout/basket"><i class="fas fa-shopping-basket"></i> Cart</a> </div></div>
-					<div class="panel-body">
-						{{ category.description|raw }}
-					</div>
-				</div>
-			{% endif %}
-			<div class="panel panel-default">
-				{% if category.description == "" %}
-					<div class="panel-heading">{{ category.name }}
-					<div class="cart"><a href="/checkout/basket"><i class="fas fa-shopping-basket"></i> Cart</a></div>
-					</div>
-				{% endif %}
-				<div class="panel-body">
-					{% if category.packages|length > 0 %}
-					    <div class="category">
-    						{% if category.displayType == "list" %}
-                                <div class="packages-row">
-                                    <table class="table table-hover table-striped">
-    							        <tbody>
-        									{% for package in category.packages %}
-        									    <tr>
-                                                  <td class="name">{{ package.name }} {% if package.countdownEnds %}<span class="text-danger">&nbsp;&nbsp;<i class="fa fa-clock-o"></i> <span class="countdown-to" data-countdown="{{ package.countdownEnds }}">{{ __("Ending Soon!") }}</span></span>{% endif %}</td>
-                                                  <td class="price">
-                                                    {% if package.customPrice == false and package.price > 0 %}
-        						                        {% if package.discount.applied %}
-        						                  		    <span class="discount">{{ package.discount.original|money }}</span>
-        						                  		{% endif %}
-        												{{ package.price|money }} <small>{{ basket.currency }}</small>
-        											{% endif %}
-                                                  </td>
-                                                  <td class="button">
-                                                    {% if package.basket %}
-        					                  			<a href="/checkout/packages/remove/{{ package.id }}" class="btn btn-sm btn-danger btn-block">{{ __("Remove") }}</a>
-        					                  		{% else %}
-        											    <a href="javascript::void(0);" data-remote="/package/{{ package.id }}" class="btn btn-sm btn-info btn-block toggle-modal">{{ __("Buy") }}</a>
-        											{% endif %}
-                                                  </td>
-                                                </tr>
-        									{% endfor %}
-    							        </tbody>
-    						        </table>
-    						    </div>
-    						{% else %}
-    						    <div class="packages-image">
-        							{% for package in category.packages %}
-        							    <div class="package">
-                                            <div class="image">
-                                                <a href="javascript:void(0);" data-remote="/package/{{ package.id }}" class="toggle-modal">
-                                                    <img src="{{ package.image.url }}" class="toggle-tooltip {% if package.image.borderless %}img-rounded{% else %}img-thumbnail{% endif %}" title="{{ __("Click for more details") }}" />
-                                                </a>
-                                            </div>
-                                            <div class="info">
-                                              <div class="text">
-                                                <div class="name">{{ package.name[:20] }}
-                                                   {% if package.countdownEnds %}<br /><span class="text-danger"><i class="fa fa-clock-o"></i> <span class="countdown-to" data-countdown="{{ package.countdownEnds }}">{{ __("Ending Soon!") }}</span></span>{% endif %}
-                                                </div>
-                                                <div class="price">
-                                                    {% if package.customPrice == false and package.price > 0.00 %}
-        												{% if package.discount.applied %}
-        				                  					<span class="discount">{{ package.discount.original|money }}</span>
-        				                  				{% endif %}
-        												{{ package.price|money }} <small>{{ basket.currency }}</small>
-        											{% endif %}
-        										</div>
-                                              </div>
-                                              <div class="button">
-                                                {% if package.basket %}
-        		                  					<a href="/checkout/packages/remove/{{ package.id }}" class="btn btn-sm btn-danger btn-block">{{ __("Remove") }}</a>
-        		                  				{% else %}
-        											<a href="javascript::void(0);" data-remote="/package/{{ package.id }}" class="btn btn-sm btn-info btn-block toggle-modal">{{ __("Buy") }}</a>
-        										{% endif %}
-                                              </div>
-                                            </div>
-                                        </div>
-        							{% endfor %}
-        						</div>
-    						{% endif %}
-    					</div>
-					{% else %}
-						{{ __("No packages to display in this category.") }}
-					{% endif %}
-				</div>
-			</div>
-		</div>
-		-->
-		<div class="col-start-10 col-span-full flex flex-col gap-5">
-			{{ modules|raw }}
-		</div>
+		{{ include('modules.html') }}
 	</div>
 {% endblock %}
