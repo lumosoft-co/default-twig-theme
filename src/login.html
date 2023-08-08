@@ -8,9 +8,21 @@
                   </span>
 		</div>
 		<div class="h-1"></div>
-		<p class="text-lg opacity-80">
-			Start Shopping!
-		</p>
+		<button type="button" class="background-color border border-main rounded-lg p-2 dropdown flex flex-row gap-2 justify-center items-center" onclick="toggleDropdown('currency')">
+			{{ basket.currency }}
+			<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+				<path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+			</svg>
+			<ul class="dropdownMenu" data-toggle="currency">
+				{% for currency in store.currencies %}
+				{% if currency.code in [store.currency, "AUD", "BRL", "CAD", "DKK", "EUR", "NOK", "NZD", "GBP", "SEK", "USD", "PLN"] %}
+				<li {% if basket.currency == currency.code %}class="active"{% endif %}>
+					<a href="?currency={{ currency.code }}">{{ currency.code }}</a>
+				</li>
+				{% endif %}
+				{% endfor %}
+			</ul>
+		</button>
 		<div class="h-4"></div>
 		<a href="/checkout/logout" class="w-full duration-100 text-gray-900 bg-gradient-to-r from-teal-200 to-lime-200 hover:bg-gradient-to-l hover:from-teal-200 hover:to-lime-200 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-teal-700 font-semibold rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Logout</a>
 	</div>

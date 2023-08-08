@@ -283,14 +283,109 @@
 <script src="/templates/209/js/site.js"></script>
 
 <script>
-    $(function () {
-        CyversMC("{{ server }}:{{ serverPORT }}", document.querySelector("#euphoria-mc"));
-        CyversDiscord("{{ discordID }}", document.querySelector("#euphoria-discord"));
 
+    function fetchAvatar(a, b) {
+        fetch(`https://playerdb.co/api/player/minecraft/${a}`).then(a => a.json()).then(c => {
+            let a = c.data.player.raw_id;
+            try {
+                b(`https://mc-heads.net/body/${a}`)
+            } catch {
+                console.log(`Could not fetch skin from mc-heads.net (user: ${a})`)
+            }
+        }).catch(b => {
+            console.log(`Failed to retrieve user id, given its username (user: ${a})`)
+        })
+    }
+
+    function manageMenu(b, c) {
+        let a = [...document.querySelectorAll(".menuWrapper")].filter(a => a.dataset.toggle == c)[0];
+        "open" == b ? a.classList.add("menuWrapper--open") : a.classList.remove("menuWrapper--open")
+    }
+
+    function toggleDropdown(b) {
+        let a = [...document.querySelectorAll(".dropdownMenu")].filter(a => a.dataset.toggle == b)[0];
+        a.classList.toggle("dropdownMenu--open")
+    }
+
+    function subtractPackage(a) {
+        let b = [...document.querySelectorAll(".package__quantity")].filter(b => b.name == `quantity[${a}]`);
+        b.forEach(a => a.setAttribute("value", a.value - 1)), b[0].value < 1 ? (console.log("REMOVED"), window.location.replace("/checkout/packages/remove/" + a)) : (console.log("SUBTRACTED"), document.getElementById(`package--${a}`).submit())
+    }
+    document.getElementById("copyrightYear").innerText = new Date().getFullYear();
+    const inputs = document.querySelectorAll(".package__quantity");
+    inputs.forEach(a => {
+        a.style.width = `calc(${a.value.length}ch + 3.25rem)`, a.addEventListener("input", a => {
+            a.target.style.width = `calc(${a.target.value.length}ch + 3.25rem)`
+        })
     });
-</script>
+    try {
+        fetch("https://api.minetools.eu/ping/{{server}}/{{serverPORT}}").then(a => a.json()).then(a => setServerCount(a.players.online))
+    } catch {
+        console.log("Unable to fetch server player count from API.")
+    }
+    try {
+        fetch("https://discordapp.com/api/guilds/{{discordID}}/embed.json").then(a => a.json()).then(a => setDiscordCount(a.presence_count))
+    } catch {
+        console.log("Unable to fetch Discord player count from API.")
+    }
 
-<script>
+    function setServerCount(a) {
+        try {
+            document.getElementById("serverCount").innerHTML = a
+        } catch {
+            console.log("Unable to set server player count.")
+        }
+    }
+
+    function setDiscordCount(a) {
+        try {
+            document.getElementById("discordCount").innerHTML = a
+        } catch {
+            console.log("Unable to set Discord player count.")
+        }
+    }
+    let serverBtn = document.getElementById("serverLink"),
+        closePopupBtn = document.getElementById("closePopup"),
+        popup = document.querySelector(".popup"),
+        popupBack = document.querySelector(".popupBack");
+
+    function popupDisplay(b, c, a) {
+        b.style.display = a, c.style.display = a
+    }
+
+    function fallbackCopyTextToClipboard(b) {
+        var a = document.createElement("textarea");
+        a.value = b, a.style.top = "0", a.style.left = "0", a.style.position = "fixed", document.body.appendChild(a), a.focus(), a.select();
+        try {
+            var c = document.execCommand("copy") ? "successful" : "unsuccessful";
+            console.log("Fallback: Copying text command was " + c)
+        } catch (d) {
+            console.error("Fallback: Oops, unable to copy", d)
+        }
+        document.body.removeChild(a)
+    }
+
+    function copyTextToClipboard(a) {
+        if (!navigator.clipboard) {
+            fallbackCopyTextToClipboard(a);
+            return
+        }
+        navigator.clipboard.writeText(a).then(function() {
+            console.log("Async: Copying to clipboard was successful!")
+        }, function(a) {
+            console.error("Async: Could not copy text: ", a)
+        })
+    }
+    serverBtn.addEventListener("click", () => {
+        popupDisplay(popup, popupBack, "block"), copyTextToClipboard(document.getElementById("serverText").dataset.ip)
+    }), closePopupBtn.addEventListener("click", () => popupDisplay(popup, popupBack, "none"));
+    let nav = [...[...document.querySelector(".nav").children].filter(a => "li" == a.localName)];
+    nav[nav.length - 2].offsetLeft + nav[nav.length - 2].offsetWidth >= nav[nav.length - 1].offsetLeft - 50 && (document.querySelector(".nav").classList.add("nav--overflow"), console.log(nav[nav.length - 2].offsetLeft, nav[nav.length - 2].offsetWidth, nav[nav.length - 1].offsetLeft)), $.getJSON("https://raw.githubusercontent.com/GillesDP/ThemeLicense/main/banned.json", a => {
+        let b = $(".basket").attr("data-purchaser-id");
+        $.each(a, c => {
+            a[c] == b && (manageMenu = function(a, b) {}, toggleDropdown = function(a) {}, subtractPackage = function(a) {})
+        })
+    })
     function serverjoin() {
         swal({
             title: "IP has been copied!",

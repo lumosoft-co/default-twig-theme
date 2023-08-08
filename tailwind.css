@@ -73,6 +73,13 @@
         --html-background: #17161a;
         --border-color: #333333;
         --input-color: #121215;
+        --transition: all .2s ease-in-out;
+        --border-radius: .5rem;
+        --spacing-xs: .5rem;
+        --spacing-s: 1rem;
+        --border-width: 1px;
+        --color-border: var(--border-color);
+        --border: var(--border-width) solid var(--color-border);
     }
 
     html,
@@ -133,6 +140,44 @@
 
     .showFlex {
         display: flex !important;
+    }
+
+    .dropdownMenu {
+        display: none;
+        border: var(--border);
+        border-radius: var(--border-radius);
+        background: rgba(0,0,0,.85);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+        min-width: 10rem;
+        position: absolute;
+        top: calc(100% + var(--spacing-xs));
+        right: 0;
+        z-index: 999;
+        padding: var(--spacing-xs) 0;
+    }
+    .dropdownMenu.dropdownMenu--open {display: block;}
+    .dropdownMenu > li > a {
+        display: block;
+        text-align: left;
+        font-family: var(--font-family);
+        line-height: 1em;
+        font-size: 1rem;
+        padding: var(--spacing-xs) var(--spacing-s);
+        line-height: 1em;
+        transition: var(--transition);
+    }
+    .dropdownMenu > .active > a {
+        color: var(--main-color);
+        background: none;
+    }
+    .dropdownMenu a:hover, .dropdown-menu a:focus {
+        background: none;
+        color: var(--main-color);
+        margin-left: .25rem;
     }
 
     div#header {
