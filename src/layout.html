@@ -126,6 +126,13 @@
 
 <div class="px-[2rem] md:px-[4rem]">
    <div class="md:block relative mt-10 z-[100]">
+       <div class="md:hidden flex flex-row gap-4 justify-between w-full mb-8">
+           <span class="text-lg main-header">{{ store.name }}</span>
+           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="text-white/80 hover:cursor-pointer hover:text-white duration-100 w-8 h-8">
+               <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+           </svg>
+
+       </div>
        <div class="mx-auto flex flex-row justify-between gap-4 rounded-lg flex gap-5 background-color border border-main p-6 items-center">
            <div class="flex-row flex-1 gap-8 justify-center rounded-lg hide md:showFlex">
                <li class="{% if page.category == "index" %}active{% endif %} flex flex-col relative">
@@ -156,7 +163,7 @@
                        href="/{{ page.slug }}">{{ page.title }}</a></li>
                {% endfor %}
            </div>
-           <div class="md:hidden flex flex-row flex-1 justify-between items-center">
+           <div class="md:hidden flex flex-row flex-1 items-center w-full">
                {% if basket.username %}
                <button type="button" data-drawer-target="drawer-navigation" data-drawer-show="drawer-navigation" aria-controls="drawer-navigation" class="rounded-lg border border-main bg-gradient-to-r from-teal-200 to-lime-200 flex flex-row justify-between gap-10">
                    <div class="p-5">
@@ -229,7 +236,7 @@
         </a>
     </div>
     <div class="h-10"></div>
-    <button type="button" data-drawer-target="drawer-navigation" data-drawer-show="drawer-navigation" aria-controls="drawer-navigation" class="rounded-lg border border-main bg-gradient-to-r w-full h-[5rem] from-teal-200 to-lime-200 flex flex-row justify-between gap-10">
+    <button type="button" data-drawer-target="drawer-navigation" data-drawer-show="drawer-navigation" aria-controls="drawer-navigation" class="rounded-lg  w-full border border-main bg-gradient-to-r w-full h-[5rem] from-teal-200 to-lime-200 flex flex-row justify-between gap-10">
         <div class="p-5">
             <div class="flex flex-col gap-1">
                 <div class="flex flex-row gap-2 items-center">
