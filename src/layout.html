@@ -127,12 +127,24 @@
 <div class="px-[2rem] md:px-[4rem]">
    <div class="md:block relative mt-10 z-[100]">
        <div class="md:hidden flex flex-row gap-4 justify-between w-full mb-8">
-           <span class="text-lg main-header">{{ store.name }}</span>
-           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="text-white/80 hover:cursor-pointer hover:text-white duration-100 w-8 h-8">
-               <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-           </svg>
-
+           <a href="/" class="text-lg main-header hover:cursor-pointer">{{ store.name }}</a>
+           <button data-collapse-toggle="navbar-default" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-default" aria-expanded="false" onclick="toggleMenu()">
+               <span class="sr-only">Open main menu</span>
+               <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+                   <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
+               </svg>
+           </button>
        </div>
+       </div>
+    <div class="hidden w-full md:block md:w-auto mb-5" id="navbar-default">
+        <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border background-color border-main rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0">
+            {% for category in store.categories %}
+            <li>
+                <a href="/category/{{ category.id }}" class="block py-2 pl-3 pr-4 text-white {% if category.active %} bg-blue-700 {% endif %} rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500" aria-current="page">{{category.name}}</a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
        <div class="mx-auto flex flex-row justify-between gap-4 rounded-lg flex gap-5 background-color border border-main p-6 items-center">
            <div class="flex-row flex-1 gap-8 justify-center rounded-lg hide md:showFlex">
                <li class="{% if page.category == "index" %}active{% endif %} flex flex-col relative">
@@ -165,7 +177,7 @@
            </div>
            <div class="md:hidden flex flex-row flex-1 items-center w-full">
                {% if basket.username %}
-               <button type="button" data-drawer-target="drawer-navigation" data-drawer-show="drawer-navigation" aria-controls="drawer-navigation" class="rounded-lg border border-main bg-gradient-to-r from-teal-200 to-lime-200 flex flex-row justify-between gap-10">
+               <button type="button" data-drawer-target="drawer-navigation" data-drawer-show="drawer-navigation" aria-controls="drawer-navigation" class="rounded-lg border border-main bg-gradient-to-r from-teal-200 to-lime-200 flex flex-row w-full justify-between gap-10">
                    <div class="p-5">
                        <div class="flex flex-col gap-1">
                            <div class="flex flex-row gap-2 items-center">
@@ -208,7 +220,7 @@
 
 {% if basket.username %}
 <!-- drawer component -->
-<div id="drawer-navigation" class="fixed z-[9999] top-0 right-0 z-40 w-[100%] h-screen p-4 overflow-y-auto transition-transform translate-x-full background-color border-l border-main" tabindex="-1" aria-labelledby="drawer-navigation-label">
+<div id="drawer-navigation" class="fixed z-[9999] top-0 right-0 z-40 w-full h-screen p-4 overflow-y-auto transition-transform translate-x-full background-color border-l border-main" tabindex="-1" aria-labelledby="drawer-navigation-label">
     <div class="flex flex-row gap-5">
         <h5 id="drawer-navigation-label" class="text-2xl main-header text-white">Your cart</h5>
         <div>
@@ -236,7 +248,7 @@
         </a>
     </div>
     <div class="h-10"></div>
-    <button type="button" data-drawer-target="drawer-navigation" data-drawer-show="drawer-navigation" aria-controls="drawer-navigation" class="rounded-lg  w-full border border-main bg-gradient-to-r w-full h-[5rem] from-teal-200 to-lime-200 flex flex-row justify-between gap-10">
+    <button type="button" data-drawer-target="drawer-navigation" data-drawer-show="drawer-navigation" aria-controls="drawer-navigation" class="rounded-lg w-full border border-main bg-gradient-to-r w-full h-[5rem] from-teal-200 to-lime-200 flex flex-row justify-between gap-10">
         <div class="p-5">
             <div class="flex flex-col gap-1">
                 <div class="flex flex-row gap-2 items-center">
@@ -267,7 +279,7 @@
                         <span class="font-bold text-base main-header opacity-80">{{ package.price|money }} {{ basket.currency }}</span>
                     </div>
                 </div>
-                <button type="button" onclick="subtractPackage({{package.id}})" class="border border-main hover:input-background-hover input-background main-header py-2 rounded-lg px-4 leading-7 text-xs text-white/80 bg-white/5 flex items-center justify-center">
+                <button type="button" onclick="subtractPackage({{package.id}}, {{package.quantity}})" class="border border-main hover:input-background-hover input-background main-header py-2 rounded-lg px-4 leading-7 text-xs text-white/80 bg-white/5 flex items-center justify-center">
                     Remove
                 </button>
             </div>
@@ -279,7 +291,9 @@
         <span class="main-header text-2xl">
             {{ basket.price|money }} {{basket.currency}}
         </span>
+        {% if basket.packages|length > 0 %}
         <a href="/checkout" class="w-[75%] text-gray-900 bg-gradient-to-r flex items-center justify-center main-header from-teal-200 to-lime-200 hover:bg-gradient-to-l hover:from-teal-200 hover:to-lime-200 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-teal-700 font-semibold rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Checkout</a>
+        {% endif %}
     </div>
     <button type="button" data-drawer-hide="drawer-navigation" aria-controls="drawer-navigation" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 absolute top-2.5 right-2.5 inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" >
         <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
@@ -287,7 +301,6 @@
     </button>
 </div>
 {% endif %}
-
 
 <!-- WEBSITE FOOTER -->
 <footer class="rounded-lg shadow m-4">
@@ -322,6 +335,11 @@
 
 <script>
 
+    function toggleMenu() {
+        const menu = document.getElementById("navbar-default");
+        menu.classList.toggle('hidden');
+    }
+
     function fetchAvatar(a, b) {
         fetch(`https://playerdb.co/api/player/minecraft/${a}`).then(a => a.json()).then(c => {
             let a = c.data.player.raw_id;
@@ -345,10 +363,18 @@
         a.classList.toggle("dropdownMenu--open")
     }
 
-    function subtractPackage(a) {
-        let b = [...document.querySelectorAll(".package__quantity")].filter(b => b.name == `quantity[${a}]`);
-        b.forEach(a => a.setAttribute("value", a.value - 1)), b[0].value < 1 ? (console.log("REMOVED"), window.location.replace("/checkout/packages/remove/" + a)) : (console.log("SUBTRACTED"), document.getElementById(`package--${a}`).submit())
+    function subtractPackage(packageId, quantity) {
+        let newValue = quantity - 1;
+
+        if (newValue < 1) {
+            console.log("REMOVED");
+            window.location.replace("/checkout/packages/remove/" + packageId);
+        } else {
+            console.log("SUBTRACTED");
+            document.getElementById(`package--${packageId}`).submit();
+        }
     }
+
     document.getElementById("copyrightYear").innerText = new Date().getFullYear();
     const inputs = document.querySelectorAll(".package__quantity");
     inputs.forEach(a => {
@@ -515,20 +541,6 @@
             var dropdown = document.getElementById('dropdown');
             dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
         });
-    }
-</script>
-
-<script>
-    function subtractPackage(a) {
-        let b = [...document.querySelectorAll(".package__quantity")].filter(b => b.name == `quantity[${a}]`);
-        b.forEach(a => a.setAttribute("value", a.value - 1));
-        if (b[0].value < 1) {
-            console.log("REMOVED");
-            window.location.replace("/checkout/packages/remove/" + a);
-        } else {
-            console.log("SUBTRACTED");
-            document.getElementById(`package--${a}`).submit();
-        }
     }
 </script>
 
