@@ -205,17 +205,18 @@
                {% endif %}
            </div>
        </div>
-   </div>
-   <div class="notification">
-       {% if page.message.display %}
-           <div class="alert alert-{{ page.message.type }} alert-dismissable">
-               <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-               {{ page.message.text }}
-           </div>
-       {% endif %}
-   </div>
 
-   {% block content %}{% endblock %}
+        <div class="notification">
+            {% if page.message.display %}
+            <div class="alert alert-{{ page.message.type }} alert-dismissable">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                {{ page.message.text }}
+            </div>
+            {% endif %}
+        </div>
+
+        {% block content %}{% endblock %}
+   </div>
 </div>
 
 {% if basket.username %}
